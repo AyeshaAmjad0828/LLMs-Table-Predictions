@@ -18,7 +18,7 @@ training_completed = False
 module = None
 generate_model = None
 process_id = None
-config_path = "../configs"
+config_path = "/configs"
 config_file = "falcon_40b/config-7b-lora-ae.yml"
 config_file_for_predict = "config-7b-lora-ae-for-predict.yml"
 
@@ -105,7 +105,7 @@ def predict():
 
     
 def get_prompt(instruction):
-    prompt_template = f"Below is an instruction that describes a task. Write an astera expression in response to complete the request.\n\n### Instruction:\n{instruction}\n\n### Response:"
+    prompt_template = f"Below is an instruction that describes a task. \n\n### Instruction:\n{instruction}\n\n### Response:"
     return prompt_template 
 
 
