@@ -1,371 +1,146 @@
-"""Prepare and train a model on a dataset. Can also infer from a model or merge lora"""
-
-import importlib
-import logging
+from datetime import datetime
+import secrets
+import modal
 import os
-import random
-import signal
-import sys
-from pathlib import Path
-from typing import Any, Dict, List, Optional, Union
-import json
-import subprocess
 
-import fire
-import torch
-import yaml
-from transformers import GenerationConfig, TextStreamer
+from .common import (
+    stub,
+    axolotl_image,
+    VOLUME_CONFIG,
+)
 
-from axolotl.utils.data import load_prepare_datasets
-from axolotl.utils.dict import DictDefault
-from axolotl.utils.models import load_model, load_tokenizer
+N_GPUS = int(os.environ.get("N_GPUS", 2))
+GPU_MEM = int(os.environ.get("GPU_MEM", 80))
+GPU_CONFIG = modal.gpu.A100(count=N_GPUS, memory=GPU_MEM)
 
-# add src to the pythonpath so we don't need to pip install this
-from axolotl.utils.tokenization import check_dataset_labels
-from axolotl.utils.trainer import setup_trainer
-from axolotl.utils.validation import validate_config
-from axolotl.utils.wandb import setup_wandb_env_vars
 
-project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-src_dir = os.path.join(project_root, "src")
-sys.path.insert(0, src_dir)
+def print_common_training_issues(config):
+    min_train_tokens = (
+        config["sequence_len"]
+        * config["gradient_accumulation_steps"]
+        * config["micro_batch_size"]
+        * N_GPUS
+    )
+    print(
+        f"Please ensure there are enough tokens to train a single epoch of {min_train_tokens} tokens (recommended to have 4x)."
+    )
 
-logging.basicConfig(level=os.getenv("LOG_LEVEL", "INFO"))
-DEFAULT_DATASET_PREPARED_PATH = "last_run_prepared"
+    min_eval_samples = config["micro_batch_size"] * N_GPUS
+    print(
+        f"Please ensure there are enough samples for evaluation ({min_eval_samples})."
+    )
 
-def choose_device(cfg):
-    def get_device():
-        try:
-            if torch.cuda.is_available():
-                return f"cuda:{cfg.local_rank}"
 
-            if torch.backends.mps.is_available():
-                return "mps"
+def run_cmd(cmd: str, run_folder: str):
+    import subprocess
 
-            raise SystemError("No CUDA/mps device found")
-        except Exception:  # pylint: disable=broad-exception-caught
-            return "cpu"
+    # Ensure volumes contain latest files.
+    VOLUME_CONFIG["/pretrained"].reload()
+    VOLUME_CONFIG["/runs"].reload()
 
-    cfg.device = get_device()
-    if cfg.device_map != "auto":
-        if cfg.device.startswith("cuda"):
-            cfg.device_map = {"": cfg.local_rank}
+    # Propagate errors from subprocess.
+    if exit_code := subprocess.call(cmd.split(), cwd=run_folder):
+        exit(exit_code)
+
+    # Commit writes to volume.
+    VOLUME_CONFIG["/runs"].commit()
+
+
+@stub.function(
+    image=axolotl_image,
+    gpu=GPU_CONFIG,
+    volumes=VOLUME_CONFIG,
+    timeout=3600 * 24,
+    _allow_background_volume_commits=True,
+)
+def train(run_folder: str):
+    print(f"Starting training run in {run_folder}")
+
+    TRAIN_CMD = "accelerate launch -m axolotl.cli.train ./config.yml"
+    run_cmd(TRAIN_CMD, run_folder)
+
+    # Kick off CPU job to merge the LoRA weights into base model.
+    merge_handle = merge.spawn(run_folder)
+    with open(f"{run_folder}/logs.txt", "a") as f:
+        f.write(f"<br>merge: https://modal.com/logs/call/{merge_handle.object_id}\n")
+        print(f"Beginning merge {merge_handle.object_id}.")
+    return merge_handle
+
+
+@stub.function(image=axolotl_image, volumes=VOLUME_CONFIG, timeout=3600 * 24)
+def merge(run_folder: str):
+    import glob
+    import yaml
+    import shutil
+
+    shutil.rmtree(f"{run_folder}/lora-out/merged", ignore_errors=True)
+
+    with open(f"{run_folder}/config.yml") as config:
+        # Loading ./lora-out saved by deepspeed has issues, use latest checkpoint instead.
+        if yaml.safe_load(config).get("deepspeed", None):
+            checkpoints = glob.glob(f"./lora-out/checkpoint-*", root_dir=run_folder)
+            MERGE_SRC = max(checkpoints, key=lambda path: int(path.split("-")[-1]))
         else:
-            cfg.device_map = {"": cfg.device}
+            MERGE_SRC = "./lora-out"
 
-def get_multi_line_input() -> Optional[str]:
-    print("Give me an instruction (Ctrl + D to finish): ")
-    instruction = ""
-    for line in sys.stdin:
-        instruction += line  # pylint: disable=consider-using-join
-    # instruction = pathlib.Path("/proc/self/fd/0").read_text()
-    return instruction
+        print(f"Merge from {MERGE_SRC} in {run_folder}")
 
-def do_inference(cfg, model, tokenizer, prompter: Optional[str]):
-    default_tokens = {"unk_token": "<unk>", "bos_token": "<s>", "eos_token": "</s>"}
+    MERGE_CMD = f"accelerate launch -m axolotl.cli.merge_lora ./exampleconfig.yml --lora_model_dir='{MERGE_SRC}' --load_in_8bit=False --load_in_4bit=False --flash_attention=False"
+    run_cmd(MERGE_CMD, run_folder)
 
-    for token, symbol in default_tokens.items():
-        # If the token isn't already specified in the config, add it
-        if not (cfg.special_tokens and token in cfg.special_tokens):
-            tokenizer.add_special_tokens({token: symbol})
-
-    prompter_module = None
-    if prompter:
-        prompter_module = getattr(
-            importlib.import_module("axolotl.prompters"), prompter
-        )
-
-    if cfg.landmark_attention:
-        from axolotl.monkeypatch.llama_landmark_attn import set_model_mem_id
-
-        set_model_mem_id(model, tokenizer)
-        model.set_mem_cache_args(
-            max_seq_len=255, mem_freq=50, top_k=5, max_cache_size=None
-        )
-
-    while True:
-        print("=" * 80)
-        # support for multiline inputs
-        instruction = get_multi_line_input()
-        if not instruction:
-            return
-        if prompter_module:
-            prompt: str = next(
-                prompter_module().build_prompt(instruction=instruction.strip("\n"))
-            )
-        else:
-            prompt = instruction.strip()
-        batch = tokenizer(prompt, return_tensors="pt", add_special_tokens=True)
-
-        print("=" * 40)
-        model.eval()
-        with torch.no_grad():
-            generation_config = GenerationConfig(
-                repetition_penalty=1.1,
-                max_new_tokens=1024,
-                temperature=0.9,
-                top_p=0.95,
-                top_k=40,
-                bos_token_id=tokenizer.bos_token_id,
-                eos_token_id=tokenizer.eos_token_id,
-                pad_token_id=tokenizer.pad_token_id,
-                do_sample=True,
-                use_cache=True,
-                return_dict_in_generate=True,
-                output_attentions=False,
-                output_hidden_states=False,
-                output_scores=False,
-            )
-            streamer = TextStreamer(tokenizer)
-            generated = model.generate(
-                inputs=batch["input_ids"].to(cfg.device),
-                generation_config=generation_config,
-                streamer=streamer,
-            )
-        print("=" * 40)
-        print(tokenizer.decode(generated["sequences"].cpu().tolist()[0]))
-
-def choose_config(path: Path):
-    yaml_files = list(path.glob("*.yml"))
-
-    if not yaml_files:
-        raise ValueError(
-            "No YAML config files found in the specified directory. Are you using a .yml extension?"
-        )
-
-    print("Choose a YAML file:")
-    for idx, file in enumerate(yaml_files):
-        print(f"{idx + 1}. {file}")
-
-    chosen_file = None
-    while chosen_file is None:
-        try:
-            choice = int(input("Enter the number of your choice: "))
-            if 1 <= choice <= len(yaml_files):
-                chosen_file = yaml_files[choice - 1]
-            else:
-                print("Invalid choice. Please choose a number from the list.")
-        except ValueError:
-            print("Invalid input. Please enter a number.")
-
-    return chosen_file
-
-def check_not_in(list1: List[str], list2: Union[Dict[str, Any], List[str]]) -> bool:
-    return not any(el in list2 for el in list1)
-
-def get_config_from_path(config: Path, **kwargs) -> DictDefault:
-    if Path(config).is_dir():
-        config = choose_config(config)
-
-    # load the config from the yaml file
-    with open(config, encoding="utf-8") as file:
-        cfg: DictDefault = DictDefault(yaml.safe_load(file))
-    # if there are any options passed in the cli, if it is something that seems valid from the yaml,
-    # then overwrite the value
-    cfg_keys = cfg.keys()
-    for k, _ in kwargs.items():
-        # if not strict, allow writing to cfg even if it's not in the yml already
-        if k in cfg_keys or not cfg.strict:
-            # handle booleans
-            if isinstance(cfg[k], bool):
-                cfg[k] = bool(kwargs[k])
-            else:
-                cfg[k] = kwargs[k]
-
-    validate_config(cfg)
-
-    return cfg
-
-def get_tokenizer(cfg: DictDefault):
-    tokenizer_config = cfg.tokenizer_config or cfg.base_model_config
-    logging.info(f"loading tokenizer... {tokenizer_config}")
-    tokenizer = load_tokenizer(tokenizer_config, cfg.tokenizer_type, cfg)
-    return tokenizer
-
-def get_peft_model(cfg: DictDefault, tokenizer):
-    return load_model(
-        cfg.base_model,
-        cfg.base_model_config,
-        cfg.model_type,
-        tokenizer,
-        cfg,
-        adapter=cfg.adapter,
-    )
-
-def train(
-    config: Path = Path("configs/"),
-    prepare_ds_only: bool = False,
-    **kwargs,
-):
-    cfg: DictDefault = get_config_from_path(config, **kwargs)
-
-    # DO NOT HARD CODE output_dir ANYWHERE ELSE IN THE CODEBASE
-    cfg['output_dir'] = f"../output/weights/{str(cfg['ID'])}"
-    logging.info(f"Saving output files to: {cfg.output_dir}")
-    # setup some derived config / hyperparams
-    cfg.gradient_accumulation_steps = cfg.gradient_accumulation_steps or (
-        cfg.batch_size // cfg.micro_batch_size
-    )
-    cfg.batch_size = (
-        cfg.batch_size or cfg.micro_batch_size * cfg.gradient_accumulation_steps
-    )
-    cfg.world_size = int(os.environ.get("WORLD_SIZE", 1))
-    cfg.local_rank = int(os.environ.get("LOCAL_RANK", 0))
-    choose_device(cfg)
-    cfg.ddp = cfg.ddp if cfg.ddp is not None else cfg.world_size != 1
-    if cfg.ddp:
-        cfg.device_map = {"": int(os.environ.get("LOCAL_RANK", 0))}
-        cfg.batch_size = cfg.batch_size * cfg.world_size
-
-    setup_wandb_env_vars(cfg)
-    if cfg.device == "mps":
-        cfg.load_in_8bit = False
-        cfg.tf32 = False
-        if cfg.bf16:
-            cfg.fp16 = True
-        cfg.bf16 = False
-
-    if cfg.tf32:
-        torch.backends.cuda.matmul.allow_tf32 = True
-
-    # load the tokenizer first
-    tokenizer = get_tokenizer(cfg)
-
-    if (
-        check_not_in(["shard", "merge_lora"], kwargs) and not cfg.inference
-    ):  # don't need to load dataset for these
-        train_dataset, eval_dataset = load_prepare_datasets(
-            tokenizer, cfg, DEFAULT_DATASET_PREPARED_PATH
-        )
-
-    if cfg.debug or "debug" in kwargs:
-        logging.info("check_dataset_labels...")
-        check_dataset_labels(
-            train_dataset.select(
-                [random.randrange(0, len(train_dataset) - 1) for _ in range(5)]  # nosec
-            ),
-            tokenizer,
-        )
-
-    if prepare_ds_only:
-        logging.info("Finished preparing dataset. Exiting...")
-        return
-
-    # Load the model and tokenizer
-    logging.info("loading model and peft_config...")
-    model, peft_config = get_peft_model(cfg, tokenizer)
-
-    if "merge_lora" in kwargs and cfg.adapter is not None:
-        logging.info("running merge of LoRA with base model")
-        model = model.merge_and_unload()
-        model.to(dtype=torch.float16)
-
-        if cfg.local_rank == 0:
-            logging.info("saving merged model")
-            model.save_pretrained(str(Path(cfg.output_dir) / "merged"))
-        return
-
-    if cfg.inference:
-        logging.info("calling do_inference function")
-        prompter: Optional[str] = "AlpacaPrompter"
-        if "prompter" in kwargs:
-            if kwargs["prompter"] == "None":
-                prompter = None
-            else:
-                prompter = kwargs["prompter"]
-        do_inference(cfg, model, tokenizer, prompter=prompter)
-        return
-
-    if "shard" in kwargs:
-        model.save_pretrained(cfg.output_dir)
-        return
-
-    trainer = setup_trainer(cfg, train_dataset, eval_dataset, model, tokenizer)
-
-    model.config.use_cache = False
-
-    if torch.__version__ >= "2" and sys.platform != "win32":
-        logging.info("Compiling torch model")
-        model = torch.compile(model)
-
-    # go ahead and presave, so we have the adapter config available to inspect
-    if peft_config:
-        logging.info(f"Pre-saving adapter config to {cfg.output_dir}")
-        peft_config.save_pretrained(cfg.output_dir)
-
-    # In case we want to stop early with ctrl+c, this is a nice to have to save the pretrained model
-    if cfg.local_rank == 0:
-        signal.signal(
-            signal.SIGINT,
-            lambda signal, frame: (
-                model.save_pretrained(cfg.output_dir),
-                sys.exit(0),
-            ),
-        )
-
-    logging.info("Starting trainer...")
-    if cfg.group_by_length:
-        logging.info("hang tight... sorting dataset for group_by_length")
-    resume_from_checkpoint = cfg.resume_from_checkpoint
-    if cfg.resume_from_checkpoint is None and cfg.auto_resume_from_checkpoints:
-        possible_checkpoints = [
-            str(cp) for cp in Path(cfg.output_dir).glob("checkpoint-*")
-        ]
-        if len(possible_checkpoints) > 0:
-            sorted_paths = sorted(
-                possible_checkpoints,
-                key=lambda path: int(path.split("-")[-1]),
-            )
-            resume_from_checkpoint = sorted_paths[-1]
-            logging.info(
-                f"Using Auto-resume functionality to start with checkpoint at {resume_from_checkpoint}"
-            )
-
-    if not Path(cfg.output_dir).is_dir():
-        os.makedirs(cfg.output_dir, exist_ok=True)
-    trainer.train(resume_from_checkpoint=resume_from_checkpoint)
-
-    logging.info(f"Training Completed!!! Saving pre-trained model to {cfg.output_dir}")
-
-    # TODO do we need this fix? https://huggingface.co/docs/accelerate/usage_guides/fsdp#saving-and-loading
-    # only save on rank 0, otherwise it corrupts output on multi-GPU when multiple processes attempt to write the same file
-    if cfg.local_rank == 0:
-        model.save_pretrained(cfg.output_dir)
-
-    # trainer.save_model(cfg.output_dir)  # TODO this may be needed for deepspeed to work? need to review another time
+    VOLUME_CONFIG["/runs"].commit()
 
 
-def monitor(id: int, last_epoch: Optional[float] = None):
-    logging_dir = f"../logs/{str(id)}.log"
-    response_data = {"training_logs": [], "gpu_info": []}
-    training_logs = {}
+@stub.function(image=axolotl_image, timeout=60 * 30, volumes=VOLUME_CONFIG)
+def launch(config_raw: str, data_raw: str):
+    from huggingface_hub import snapshot_download
+    import yaml
+
+    # Ensure the base model is downloaded
+    # TODO(gongy): test if this works with a path to previous fine-tune
+    config = yaml.safe_load(config_raw)
+    model_name = config["base_model"]
+
     try:
-        with open(logging_dir, 'r') as f:
-            lines = f.readlines()
-            for line in lines:
-                line = json.loads(line.replace("\'", "\""))
-                if 'eval_runtime' in line:
-                    epoch = line['epoch']
-                    eval_loss = line['eval_loss']
+        snapshot_download(model_name, local_files_only=True)
+        print(f"Volume contains {model_name}.")
+    except FileNotFoundError:
+        print(f"Downloading {model_name} ...")
+        snapshot_download(model_name)
 
-                    if epoch not in training_logs:
-                        continue
+        print("Committing /pretrained directory (no progress bar) ...")
+        VOLUME_CONFIG["/pretrained"].commit()
 
-                    training_logs[epoch]['eval_loss'] = eval_loss
-                    continue
-                if last_epoch is None or line['epoch'] > last_epoch:
-                    line['eval_loss'] = None
-                    training_logs[line['epoch']] = line
-        response_data['gpu_info'] = get_gpu_info()
-        #last_training_log = list(training_logs.values())[-1]
-        #response_data["training_logs"] = [last_training_log]
-        response_data['training_logs'] = list(training_logs.values())
-        return response_data
-    except FileNotFoundError as e:
-        return {'message': 'No training data available.'}
-    except Exception as e:
-        print(str(e))
-        return {'message': str(e)}
+    # Write config and data into a training subfolder.
+    time_string = datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
+    run_folder = f"/runs/axo-{time_string}-{secrets.token_hex(2)}"
+    os.makedirs(run_folder)
 
-if __name__ == "__main__":
-    fire.Fire(train)
+    print(f"Preparing training run in {run_folder}.")
+    with (
+        open(f"{run_folder}/config.yml", "w") as config_file,
+        open(f"{run_folder}/{config['datasets'][0]['path']}", "w") as data_file,
+    ):
+        config_file.write(config_raw)
+        data_file.write(data_raw)
+    VOLUME_CONFIG["/runs"].commit()
+
+    # Start training run.
+    train_handle = train.spawn(run_folder)
+    with open(f"{run_folder}/logs.txt", "w") as f:
+        f.write(f"train: https://modal.com/logs/call/{train_handle.object_id}")
+    VOLUME_CONFIG["/runs"].commit()
+
+    return run_folder, train_handle
+
+
+@stub.local_entrypoint()
+def main(config: str = "config.yml", dataset: str = "my_data.jsonl"):
+    # Read config.yml and my_data.jsonl and pass them to the new function.
+    dir = os.path.dirname(__file__)
+    with open(f"{dir}/{config}", "r") as cfg, open(f"{dir}/{dataset}", "r") as data:
+        _, train_handle = launch.remote(cfg.read(), data.read())
+
+    # Wait for the training run to finish.
+    merge_handle = train_handle.get()
+    merge_handle.get()
