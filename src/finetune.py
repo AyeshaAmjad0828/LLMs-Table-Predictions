@@ -3,7 +3,7 @@ import secrets
 import modal
 import os
 
-from .commons import (
+from .common import (
     stub,
     axolotl_image,
     VOLUME_CONFIG,
