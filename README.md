@@ -24,7 +24,7 @@ Let's go over the design and execution of each experiment in a step by step mann
 
 Here is an a diagram showing a high-level set up of the first experiment.
 
-![Experiment1](D:\OneDrive - Astera Software\Documents\GitHub\LLMs-Table-Processing\README.assets\Experiment1.jpg)
+![Experiment1](./README.assets/Experiment1.jpg)
 
 
 
@@ -32,7 +32,7 @@ Here is an a diagram showing a high-level set up of the first experiment.
 
 Here is an a diagram showing a high-level set up of the second experiment.
 
-![Experiment2](D:\OneDrive - Astera Software\Documents\GitHub\LLMs-Table-Processing\README.assets\Experiment2.jpg)
+![Experiment2](./README.assets/Experiment2.jpg)
 
 
 
@@ -46,10 +46,10 @@ Here is an a diagram showing a high-level set up of the second experiment.
 
 4. Create a new [secret](https://modal.com/ayeshaamjad0828/secrets) for hugging face in your modal account. This secret is a way to mask [hugging face access token](https://modal.com/ayeshaamjad0828/secrets). 
 
-   ![image-20240107203301672](D:\OneDrive - Astera Software\Documents\GitHub\LLMs-Table-Processing\README.assets\image-20240107203301672.png)
+   ![image-20240107203301672](./README.assets/image-20240107203301672.png)
 
    Once created, your keys will be displayed in the same location. 
-   ![image-20240107203439593](D:\OneDrive - Astera Software\Documents\GitHub\LLMs-Table-Processing\README.assets\image-20240107203439593.png)
+   ![image-20240107203439593](./README.assets/image-20240107203439593.png)
 
 5. Install modal in your current python environment `pip install modal`.
 
@@ -57,7 +57,7 @@ Here is an a diagram showing a high-level set up of the second experiment.
 
 7.  Set up modal token in your python environment `modal setup`.
 
-   ![modal-setup](D:\OneDrive - Astera Software\Documents\GitHub\LLMs-Table-Processing\README.assets\modal-setup.PNG)
+   ![modal-setup](./README.assets/modal-setup.PNG)
 
 8. (Optional) To monitor LLM finetuning performance visually, set up a [weights and biases account](https://wandb.ai/home) , get its [authorize key](https://wandb.ai/authorize), and create its [secret](https://modal.com/ayeshaamjad0828/secrets) in the same way as hugging face secret on modal. 
 
