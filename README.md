@@ -1,7 +1,7 @@
 # Using LLMs to Predict on Tabular Data
 ## Finetuning LLMs to predict on some of the popular Kaggle datasets. 
 
-> Refer to the pre-requisites to set up the environment for this experiment
+> Refer to the [pre-requisites]([AyeshaAmjad0828/LLMs-Table-Predictions: Training LLMs on some of the popular kaggle datasets (github.com)](https://github.com/AyeshaAmjad0828/LLMs-Table-Predictions?tab=readme-ov-file#pre-requisites)) section to set up the environment for this experiment.
 
 ### Technology Stack
 
