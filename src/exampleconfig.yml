@@ -8,17 +8,17 @@ bf16: true
 strict: false
 
 datasets:
-  - path: source.jsonl
+  - path: my_data.jsonl
     ds_type: json
     type:
-      # JSONL file contains instructions, input, output fields per line.
+      # JSONL file contains question, context, answer fields per line.
       # This gets mapped to instruction, input, output axolotl tags.
-      field_instruction: instruction
-      field_input: input
-      field_output: output
+      field_instruction: question
+      field_input: context
+      field_output: answer
       # Format is used by axolotl to generate the prompt.
       format: |-
-        [INST] Using the schema context below, generate an expression query that answers the question.
+        [INST] Using the schema context below, generate a SQL query that answers the question.
         {input}
         {instruction} [/INST] 
 

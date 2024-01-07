@@ -135,8 +135,8 @@ def launch(config_raw: str, data_raw: str):
 
 
 @stub.local_entrypoint()
-def main(config: str = "exampleconfig.yml", dataset: str = "source.jsonl"):
-    # Read exampleconfig.yml and source.jsonl and pass them to the new function.
+def main(config: str = "exampleconfig.yml", dataset: str = "my_data.jsonl"):
+    # Read exampleconfig.yml and my_data.jsonl and pass them to the new function.
     dir = os.path.dirname(__file__)
     with open(f"{dir}/{config}", "r") as cfg, open(f"{dir}/{dataset}", "r") as data:
         _, train_handle = launch.remote(cfg.read(), data.read())
@@ -144,4 +144,5 @@ def main(config: str = "exampleconfig.yml", dataset: str = "source.jsonl"):
     # Wait for the training run to finish.
     merge_handle = train_handle.get()
     merge_handle.get()
+
 
