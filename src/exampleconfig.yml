@@ -39,9 +39,9 @@ lora_dropout: 0.05
 lora_target_linear: true # target all linear layers
 lora_fan_in_fan_out:
 
-wandb_project:
+wandb_project: code-7b-sql-output
+wandb_watch: all
 wandb_entity:
-wandb_watch:
 wandb_run_id:
 
 gradient_accumulation_steps: 1
