@@ -26,6 +26,14 @@ Here is an a diagram showing a high-level set up of the first experiment.
 
 ![Experiment1](./README.assets/Experiment1.jpg)
 
+This experiment contains three steps:
+
+1. Serializing the data (both train and test) from table to text. (list serialization, text template, manual template)
+2. Finetuning an LLMs (Llama-7B, Llama-13b, Llama 70b). All logic related to finetuning is in src/finetune.py
+3. Perform inference/prediction on test data using finetuned model. All logic related to inference is in src/inference.py
+
+#### Table to Text
+
 
 
 ### Experiment 2 - LLM Vector Embeddings for AutoML
