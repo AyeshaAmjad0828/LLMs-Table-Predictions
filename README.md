@@ -1,7 +1,7 @@
 # Using LLMs to Predict on Tabular Data
 ## Finetuning LLMs to predict on some of the popular Kaggle datasets. 
 
-> Refer to the pre-requisites to set up the environment for this experiment
+> Refer to the [pre-requisites]([AyeshaAmjad0828/LLMs-Table-Predictions: Training LLMs on some of the popular kaggle datasets (github.com)](https://github.com/AyeshaAmjad0828/LLMs-Table-Predictions?tab=readme-ov-file#pre-requisites)) section to set up the environment for this experiment.
 
 ### Technology Stack
 
@@ -25,6 +25,14 @@ Let's go over the design and execution of each experiment in a step by step mann
 Here is an a diagram showing a high-level set up of the first experiment.
 
 ![Experiment1](./README.assets/Experiment1.jpg)
+
+This experiment contains three steps:
+
+1. Serializing the data (both train and test) from table to text. (list serialization, text template, manual template)
+2. Finetuning an LLMs (Llama-7B, Llama-13b, Llama 70b). All logic related to finetuning is in src/finetune.py
+3. Perform inference/prediction on test data using finetuned model. All logic related to inference is in src/inference.py
+
+#### Table to Text
 
 
 
