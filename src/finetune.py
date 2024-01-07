@@ -3,7 +3,7 @@ import secrets
 import modal
 import os
 
-from .commons import (
+from .common import (
     stub,
     axolotl_image,
     VOLUME_CONFIG,
@@ -56,7 +56,7 @@ def run_cmd(cmd: str, run_folder: str):
 def train(run_folder: str):
     print(f"Starting training run in {run_folder}")
 
-    TRAIN_CMD = "accelerate launch -m axolotl.cli.train ./config.yml"
+    TRAIN_CMD = "accelerate launch -m axolotl.cli.train ./exampleconfig.yml"
     run_cmd(TRAIN_CMD, run_folder)
 
     # Kick off CPU job to merge the LoRA weights into base model.
@@ -75,7 +75,7 @@ def merge(run_folder: str):
 
     shutil.rmtree(f"{run_folder}/lora-out/merged", ignore_errors=True)
 
-    with open(f"{run_folder}/config.yml") as config:
+    with open(f"{run_folder}/exampleconfig.yml") as config:
         # Loading ./lora-out saved by deepspeed has issues, use latest checkpoint instead.
         if yaml.safe_load(config).get("deepspeed", None):
             checkpoints = glob.glob(f"./lora-out/checkpoint-*", root_dir=run_folder)
@@ -118,7 +118,7 @@ def launch(config_raw: str, data_raw: str):
 
     print(f"Preparing training run in {run_folder}.")
     with (
-        open(f"{run_folder}/config.yml", "w") as config_file,
+        open(f"{run_folder}/exampleconfig.yml", "w") as config_file,
         open(f"{run_folder}/{config['datasets'][0]['path']}", "w") as data_file,
     ):
         config_file.write(config_raw)
@@ -135,8 +135,8 @@ def launch(config_raw: str, data_raw: str):
 
 
 @stub.local_entrypoint()
-def main(config: str = "config.yml", dataset: str = "my_data.jsonl"):
-    # Read config.yml and my_data.jsonl and pass them to the new function.
+def main(config: str = "exampleconfig.yml", dataset: str = "my_data.jsonl"):
+    # Read exampleconfig.yml and my_data.jsonl and pass them to the new function.
     dir = os.path.dirname(__file__)
     with open(f"{dir}/{config}", "r") as cfg, open(f"{dir}/{dataset}", "r") as data:
         _, train_handle = launch.remote(cfg.read(), data.read())
@@ -144,3 +144,5 @@ def main(config: str = "config.yml", dataset: str = "my_data.jsonl"):
     # Wait for the training run to finish.
     merge_handle = train_handle.get()
     merge_handle.get()
+
+

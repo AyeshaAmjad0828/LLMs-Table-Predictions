@@ -29,7 +29,7 @@ vllm_image = (
     .pip_install("vllm==0.2.5")
 )
 
-stub = Stub(APP_NAME, secrets=[Secret.from_name("my-huggingface-secret1")])
+stub = Stub(APP_NAME, secrets=[Secret.from_name("my-huggingface-secret1"), Secret.from_name("my-wandb-secret1")])
 
 # Volumes for pre-trained models and training runs.
 pretrained_volume = Volume.persisted("example-pretrained-vol")
