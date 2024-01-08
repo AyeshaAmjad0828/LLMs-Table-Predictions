@@ -152,7 +152,7 @@ Here is an a diagram showing a high-level set up of the second experiment.
 This experiment involves 3 steps
 1. Data Serialization
    - **Method:** Manual Template
-   - **Description:** Data is serialized using the Manual Template method. Sample file is 
+   - **Description:** Data is serialized using the Manual Template method. Sample file is [manual_template_serialization.jsonl](https://github.com/AzeemQidwai/LLMs-Table-Predictions/blob/azeem-main/serialization/serialized_dataset/manual_template_serialization.jsonl)
 
 2. Embedding Vectors Generation
    - **Model:** OpenAI embedding model `text-embedding-ada-002`
