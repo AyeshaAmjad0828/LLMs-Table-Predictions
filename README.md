@@ -118,7 +118,80 @@ Training job uses finalconfig.yml where training configurations are defined. Her
 
 
 
-##### Initializing Axolotl, Huggingface, and W&B applications
+##### Using CLI for finetuning
+
+Navigate to the location containing src folder in CLI and start the finetuning with a simple command.
+
+```
+modal run --detach src.finetune
+```
+
+*`--detach` lets the app continue running even if the client disconnects*.
+
+The script reads two local files: `finalconfig.yml` and `my_data.jsonl`. The contents passed as arguments to the remote `launch` function, which will write them to the `/runs` volume. Next, `train` will read the config and data from the new folder for reproducible training runs.
+
+The default configuration fine-tunes meta-llama/Llama-2-7b-chat-hf with 20 epochs. It uses DeepSpeed ZeRO-3 to shard the model state across 2 A100s.
+
+The command will first install all the required packages. Followed by creating objects for the function defined in `finetune.py`. 
+
+A link to app logs maintained by modal is provided which stores information on cpu and gpu consumption. 
+
+![image-20240108170622349](./README.assets/image-20240108170622349.png)
+
+A link to weights and biases dashboard is also provided along with the info passed to it.
+![image-20240108171008006](./README.assets/image-20240108171008006.png)
+
+
+
+### Experiment 2 - LLM Vector Embeddings for AutoML
+
+Here is an a diagram showing a high-level set up of the second experiment.
+
+![Experiment2](./README.assets/Experiment2.jpg)
+
+
+
+### Pre-requisites
+
+#### Setting up accounts on Modal, Hugging Face, W&B
+
+1. Create an account on [Modal](https://modal.com/).
+
+2. Create an account on [Hugging face](https://huggingface.co/) and agree to the terms and conditions for accessing [Llama](https://huggingface.co/meta-llama/Llama-2-13b-chat-hf) models. 
+
+3. Get the [hugging face access token](https://huggingface.co/settings/tokens). 
+
+4. Create a new [secret](https://modal.com/ayeshaamjad0828/secrets) for hugging face in your modal account. This secret is a way to mask [hugging face access token](https://modal.com/ayeshaamjad0828/secrets). 
+
+   ![image-20240107203301672](./README.assets/image-20240107203301672.png)
+
+   Once created, your keys will be displayed in the same location. 
+   ![image-20240107203439593](./README.assets/image-20240107203439593.png)
+
+5. Install modal in your current python environment `pip install modal`.
+
+6. Open cmd, navigate to python scripts folder  ...\AppData\Local\Programs\Python\Python310\Scripts
+
+7.  Set up modal token in your python environment `modal setup`.
+
+   ![modal-setup](./README.assets/modal-setup.PNG)
+
+8. (Optional) To monitor LLM finetuning performance visually, set up a [weights and biases account](https://wandb.ai/home) , get its [authorize key](https://wandb.ai/authorize), and create its [secret](https://modal.com/ayeshaamjad0828/secrets) in the same way as hugging face secret on modal. 
+
+   Install weights and biases library in your current python environment  `pip install wandb`
+
+   Add your wandb config to your config.yml script (you will find this in my [finalconfig.yml](https://github.com/AyeshaAmjad0828/LLMs-Table-Predictions/blob/main/src/finalconfig.yml))
+
+   ```
+   wandb_project: tabllm-7b-prediction-output
+   wandb_watch: all
+   wandb_entity:
+   wandb_run_id:
+   ```
+
+> you may have to perform modal setup again in your python environment as shown in step 7. 
+
+#### Initializing Axolotl, Huggingface, and W&B applications
 
 Script for initializing the required applications in modal is [common.py](https://github.com/AyeshaAmjad0828/LLMs-Table-Predictions/blob/main/src/common.py). This is where we define application name to be appeared in modal.
 
@@ -164,56 +237,3 @@ VOLUME_CONFIG: dict[str | os.PathLike, Volume] = {
 
 
 
-### Experiment 2 - LLM Vector Embeddings for AutoML
-
-Here is an a diagram showing a high-level set up of the second experiment.
-
-![Experiment2](./README.assets/Experiment2.jpg)
-
-
-
-### Pre-requisites
-
-1. Create an account on [Modal](https://modal.com/).
-
-2. Create an account on [Hugging face](https://huggingface.co/) and agree to the terms and conditions for accessing [Llama](https://huggingface.co/meta-llama/Llama-2-13b-chat-hf) models. 
-
-3. Get the [hugging face access token](https://huggingface.co/settings/tokens). 
-
-4. Create a new [secret](https://modal.com/ayeshaamjad0828/secrets) for hugging face in your modal account. This secret is a way to mask [hugging face access token](https://modal.com/ayeshaamjad0828/secrets). 
-
-   ![image-20240107203301672](./README.assets/image-20240107203301672.png)
-
-   Once created, your keys will be displayed in the same location. 
-   ![image-20240107203439593](./README.assets/image-20240107203439593.png)
-
-5. Install modal in your current python environment `pip install modal`.
-
-6. Open cmd, navigate to python scripts folder  ...\AppData\Local\Programs\Python\Python310\Scripts
-
-7.  Set up modal token in your python environment `modal setup`.
-
-   ![modal-setup](./README.assets/modal-setup.PNG)
-
-8. (Optional) To monitor LLM finetuning performance visually, set up a [weights and biases account](https://wandb.ai/home) , get its [authorize key](https://wandb.ai/authorize), and create its [secret](https://modal.com/ayeshaamjad0828/secrets) in the same way as hugging face secret on modal. 
-
-   Install weights and biases library in your current python environment  `pip install wandb`
-
-   Add your wandb config to your config.yml script (you will find this in my exampleconfig.yaml)
-
-   ```python
-   wandb_project: code-7b-sql-output
-   wandb_watch: all
-   wandb_entity:
-   wandb_run_id:
-   ```
-
-> you may have to perform modal setup again in your python environment as shown in step 7. 
-
-9. Add both hugging face and weights and biases secrets to common.py script for initializing the stub:
-
-   ```python
-   stub = Stub(APP_NAME, secrets=[Secret.from_name("my-huggingface-secret1"), Secret.from_name("my-wandb-secret1")])
-   ```
-
-   
