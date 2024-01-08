@@ -32,8 +32,8 @@ vllm_image = (
 stub = Stub(APP_NAME, secrets=[Secret.from_name("my-huggingface-secret1"), Secret.from_name("my-wandb-secret1")])
 
 # Volumes for pre-trained models and training runs.
-pretrained_volume = Volume.persisted("example-pretrained-vol")
-runs_volume = Volume.persisted("example-runs-vol")
+pretrained_volume = Volume.persisted("tablellm-pretrained-vol")
+runs_volume = Volume.persisted("tablellm-runs-vol")
 VOLUME_CONFIG: dict[str | os.PathLike, Volume] = {
     "/pretrained": pretrained_volume,
     "/runs": runs_volume,

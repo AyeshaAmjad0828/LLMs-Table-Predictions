@@ -59,7 +59,7 @@ class Inference:
 @stub.local_entrypoint()
 def inference_main(run_folder: str):
     text = input(
-        "Below is an instruction that describes a task. Write an astera expression in response to complete the request.\n"
+        "Using the data values below, generate a reponse to the instructions:\n"
     )
     print("Loading model ...")
     for chunk in Inference(f"{run_folder}/lora-out/merged").completion.remote_gen(text):
