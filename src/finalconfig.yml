@@ -11,15 +11,17 @@ datasets:
   - path: my_data.jsonl
     ds_type: json
     type:
-      # JSONL file contains data, and output fields per line.
-      # This gets mapped to input, output axolotl tags.
+      # JSONL file contains instructions, data, response fields per line.
+      # This gets mapped to instruction, input, output axolotl tags.
+      field_instruction: instructions
       field_input: data
-      field_output: output
+      field_output: response
       # Format is used by axolotl to generate the prompt.
       format: |-
-        [INST] For the given data values of trans_date_trans_time, cc_num, merchant, category, amt, first, last, gender, street, city, state, zip, lat, long, city_pop, job, dob, trans_num, unix_time, merch_lat, merch_long in input, what is the output value of is_fraud?
+        [INST] Using the data values below, generate a reponse to the instructions.
         {input}
-        [/INST] 
+        {instruction} [/INST] 
+
 
 dataset_prepared_path:
 val_set_size: 32 # must be at least micro_batch_size * N_GPUS, and more if eval packing.

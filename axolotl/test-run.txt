@@ -1,0 +1,655 @@
+Microsoft Windows [Version 10.0.19045.3693]
+(c) Microsoft Corporation. All rights reserved.
+
+D:\OneDrive - Astera Software\Documents\GitHub\LLMs-Table-Processing>modal run --detach src.finetune
+Note that running a local entrypoint in detached mode only keeps the last triggered Modal function alive after the parent process has been killed or disconnected.
+✓ Initialized. View run at https://modal.com/ayeshaamjad0828/apps/ap-OLRcilArSgMsZvLLtGbOga
+✓ Created objects.
+├── 🔨 Created mount D:\OneDrive - Astera Software\Documents\GitHub\LLMs-Table-Processing\src
+├── 🔨 Created train.
+├── 🔨 Created merge.
+├── 🔨 Created launch.
+└── 🔨 Created Inference.completion.
+
+==========
+== CUDA ==
+==========
+
+CUDA Version 11.8.0
+
+Container image Copyright (c) 2016-2023, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
+
+WARNING: The NVIDIA Driver was not detected.  GPU functionality will not be available.
+   Use the NVIDIA Container Toolkit to start this container with GPU support; see
+   https://docs.nvidia.com/datacenter/cloud-native/ .
+
+Volume contains codellama/CodeLlama-7b-Instruct-hf.
+Preparing training run in /runs/axo-2024-01-07-08-28-20-6e57.
+
+==========
+== CUDA ==
+==========
+
+CUDA Version 11.8.0
+
+Container image Copyright (c) 2016-2023, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
+
+Starting training run in /runs/axo-2024-01-07-08-28-20-6e57
+The following values were not passed to `accelerate launch` and had defaults used instead:
+        `--num_processes` was set to a value of `2`
+                More than one GPU was found, enabling multi-GPU training.
+                If this was unintended please pass in `--num_processes=1`.
+        `--num_machines` was set to a value of `1`
+        `--mixed_precision` was set to a value of `'no'`
+        `--dynamo_backend` was set to a value of `'no'`
+To avoid this warning pass in values for each of the problematic parameters or run `accelerate config`.
+/root/miniconda3/envs/py3.10/lib/python3.10/site-packages/bitsandbytes/cuda_setup/main.py:106: UserWarning:
+
+================================================================================
+WARNING: Manual override via BNB_CUDA_VERSION env variable detected!
+BNB_CUDA_VERSION=XXX can be used to load a bitsandbytes version that is different from the PyTorch CUDA version.
+If this was unintended set the BNB_CUDA_VERSION variable to an empty string: export BNB_CUDA_VERSION=
+If you use the manual override make sure the right libcudart.so is in your LD_LIBRARY_PATH
+For example by adding the following to your .bashrc: export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:<path_to_cuda_dir/lib64
+Loading CUDA version: BNB_CUDA_VERSION=118
+================================================================================
+
+
+  warn((f'\n\n{"="*80}\n'
+/root/miniconda3/envs/py3.10/lib/python3.10/site-packages/bitsandbytes/cuda_setup/main.py:106: UserWarning:
+
+================================================================================
+WARNING: Manual override via BNB_CUDA_VERSION env variable detected!
+BNB_CUDA_VERSION=XXX can be used to load a bitsandbytes version that is different from the PyTorch CUDA version.
+If this was unintended set the BNB_CUDA_VERSION variable to an empty string: export BNB_CUDA_VERSION=
+If you use the manual override make sure the right libcudart.so is in your LD_LIBRARY_PATH
+For example by adding the following to your .bashrc: export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:<path_to_cuda_dir/lib64
+Loading CUDA version: BNB_CUDA_VERSION=118
+================================================================================
+
+
+  warn((f'\n\n{"="*80}\n'
+/root/miniconda3/envs/py3.10/lib/python3.10/site-packages/transformers/deepspeed.py:23: FutureWarning: transformers.deepspeed module is deprecated and will be removed in a future version. Please import deepspeed modules directly from transformers.integrations
+  warnings.warn(
+/root/miniconda3/envs/py3.10/lib/python3.10/site-packages/transformers/deepspeed.py:23: FutureWarning: transformers.deepspeed module is deprecated and will be removed in a future version. Please import deepspeed modules directly from transformers.integrations
+  warnings.warn(
+                                 dP            dP   dP
+                                 88            88   88
+      .d8888b. dP.  .dP .d8888b. 88 .d8888b. d8888P 88
+      88'  `88  `8bd8'  88'  `88 88 88'  `88   88   88
+      88.  .88  .d88b.  88.  .88 88 88.  .88   88   88
+      `88888P8 dP'  `dP `88888P' dP `88888P'   dP   dP
+
+
+
+←[33m[2024-01-07 08:29:01,896] [WARNING] [axolotl.validate_config:219] [PID:27] [RANK:0] We recommend setting `load_in_8bit: true` for LORA finetuning←[39m
+←[33m[2024-01-07 08:29:01,896] [WARNING] [axolotl.validate_config:219] [PID:28] [RANK:1] We recommend setting `load_in_8bit: true` for LORA finetuning←[39m
+[2024-01-07 08:29:02,388] [INFO] [axolotl.normalize_config:141] [PID:28] [RANK:1] GPU memory usage baseline: 0.000GB (+0.818GB misc)←[39m
+[2024-01-07 08:29:02,388] [INFO] [axolotl.normalize_config:141] [PID:27] [RANK:0] GPU memory usage baseline: 0.000GB (+0.818GB misc)←[39m
+[2024-01-07 08:29:03,391] [DEBUG] [axolotl.load_tokenizer:172] [PID:28] [RANK:1] EOS: 2 / </s>←[39m
+[2024-01-07 08:29:03,391] [DEBUG] [axolotl.load_tokenizer:173] [PID:28] [RANK:1] BOS: 1 / <s>←[39m
+[2024-01-07 08:29:03,392] [DEBUG] [axolotl.load_tokenizer:174] [PID:28] [RANK:1] PAD: 2 / </s>←[39m
+[2024-01-07 08:29:03,392] [DEBUG] [axolotl.load_tokenizer:175] [PID:28] [RANK:1] UNK: 0 / <unk>←[39m
+[2024-01-07 08:29:03,394] [DEBUG] [axolotl.load_tokenizer:172] [PID:27] [RANK:0] EOS: 2 / </s>←[39m
+[2024-01-07 08:29:03,394] [DEBUG] [axolotl.load_tokenizer:173] [PID:27] [RANK:0] BOS: 1 / <s>←[39m
+[2024-01-07 08:29:03,394] [DEBUG] [axolotl.load_tokenizer:174] [PID:27] [RANK:0] PAD: 2 / </s>←[39m
+[2024-01-07 08:29:03,394] [DEBUG] [axolotl.load_tokenizer:175] [PID:27] [RANK:0] UNK: 0 / <unk>←[39m
+[2024-01-07 08:29:03,394] [INFO] [axolotl.load_tokenized_prepared_datasets:147] [PID:27] [RANK:0] Unable to find prepared dataset in last_run_prepared/98d32d27c7dc8de6c1ac90d6d8a8e65b←[39m
+[2024-01-07 08:29:03,394] [INFO] [axolotl.load_tokenized_prepared_datasets:148] [PID:27] [RANK:0] Loading raw datasets...←[39m
+[2024-01-07 08:29:03,394] [INFO] [axolotl.load_tokenized_prepared_datasets:153] [PID:27] [RANK:0] No seed provided, using default seed of 42←[39m
+
+←[1ADownloading data files:   0%|          | 0/1 [00:00<?, ?it/s]
+←[1ADownloading data files: 100%|██████████| 1/1 [00:00<00:00, 2231.01it/s]
+
+←[1AExtracting data files:   0%|          | 0/1 [00:00<?, ?it/s]
+←[1AExtracting data files: 100%|██████████| 1/1 [00:00<00:00,  4.10it/s]Extracting data files: 100%|██████████| 1/1 [00:00<00:00,  4.09it/s]
+
+←[1AGenerating train split: 0 examples [00:00, ? examples/s]
+←[1AGenerating train split: 4000 examples [00:00, 44797.42 examples/s]
+
+←[1AMap (num_proc=5):   0%|          | 0/4000 [00:00<?, ? examples/s]
+←[1AMap (num_proc=5):   0%|          | 1/4000 [00:02<1:43:59,  1.56s/ examples]
+←[1AMap (num_proc=5):   0%|          | 2/4000 [00:02<1:02:34,  1.06 examples/s]
+←[1AMap (num_proc=5):   4%|▍         | 160/4000 [00:02<00:29, 130.73 examples/s]
+←[1AMap (num_proc=5):  10%|█         | 419/4000 [00:02<00:09, 382.09 examples/s]
+←[1AMap (num_proc=5):  18%|█▊        | 703/4000 [00:02<00:04, 696.84 examples/s]
+←[1AMap (num_proc=5):  25%|██▍       | 988/4000 [00:02<00:02, 1029.23 examples/s]
+←[1AMap (num_proc=5):  32%|███▏      | 1278/4000 [00:02<00:01, 1363.16 examples/s]
+←[1AMap (num_proc=5):  39%|███▊      | 1546/4000 [00:02<00:01, 1627.73 examples/s]
+←[1AMap (num_proc=5):  45%|████▌     | 1819/4000 [00:02<00:01, 1872.79 examples/s]
+←[1AMap (num_proc=5):  53%|█████▎    | 2111/4000 [00:02<00:00, 2122.82 examples/s]
+←[1AMap (num_proc=5):  60%|█████▉    | 2394/4000 [00:02<00:00, 2302.27 examples/s]
+←[1AMap (num_proc=5):  67%|██████▋   | 2672/4000 [00:03<00:00, 2424.37 examples/s]
+←[1AMap (num_proc=5):  74%|███████▍  | 2951/4000 [00:03<00:00, 2524.67 examples/s]
+←[1AMap (num_proc=5):  81%|████████▏ | 3253/4000 [00:03<00:00, 2648.80 examples/s]
+←[1AMap (num_proc=5):  88%|████████▊ | 3534/4000 [00:03<00:00, 2683.44 examples/s]
+←[1AMap (num_proc=5):  97%|█████████▋| 3871/4000 [00:03<00:00, 2863.53 examples/s]
+←[1AMap (num_proc=5): 100%|██████████| 4000/4000 [00:03<00:00, 1016.83 examples/s]
+[2024-01-07 08:29:09,050] [INFO] [axolotl.load_tokenized_prepared_datasets:362] [PID:27] [RANK:0] merging datasets←[39m
+[2024-01-07 08:29:09,055] [INFO] [axolotl.load_tokenized_prepared_datasets:369] [PID:27] [RANK:0] Saving merged prepared dataset to disk... last_run_prepared/98d32d27c7dc8de6c1ac90d6d8a8e65b←[39m
+
+←[1ASaving the dataset (0/1 shards):   0%|          | 0/4000 [00:00<?, ? examples/s]
+←[1ASaving the dataset (1/1 shards): 100%|██████████| 4000/4000 [00:00<00:00, 103809.77 examples/s]
+←[1ASaving the dataset (1/1 shards): 100%|██████████| 4000/4000 [00:00<00:00, 102604.16 examples/s]
+[2024-01-07 08:29:16,126] [INFO] [axolotl.load_tokenized_prepared_datasets:147] [PID:28] [RANK:1] Unable to find prepared dataset in last_run_prepared/98d32d27c7dc8de6c1ac90d6d8a8e65b←[39m
+[2024-01-07 08:29:16,129] [INFO] [axolotl.load_tokenized_prepared_datasets:148] [PID:28] [RANK:1] Loading raw datasets...←[39m
+[2024-01-07 08:29:16,129] [INFO] [axolotl.load_tokenized_prepared_datasets:153] [PID:28] [RANK:1] No seed provided, using default seed of 42←[39m
+
+[2024-01-07 08:29:18,421] [INFO] [axolotl.load_tokenized_prepared_datasets:362] [PID:28] [RANK:1] merging datasets←[39m
+←[1AFilter (num_proc=5):   0%|          | 0/3968 [00:00<?, ? examples/s]
+←[1AFilter (num_proc=5):  20%|█▉        | 793/3968 [00:01<00:05, 546.49 examples/s]
+←[1AFilter (num_proc=5): 100%|██████████| 3968/3968 [00:01<00:00, 2540.43 examples/s]
+
+←[1AFilter (num_proc=5):   0%|          | 0/32 [00:00<?, ? examples/s]
+←[1AFilter (num_proc=5):  22%|██▏       | 7/32 [00:00<00:01, 17.40 examples/s]
+←[1AFilter (num_proc=5):  62%|██████▎   | 20/32 [00:00<00:00, 45.79 examples/s]
+←[1AFilter (num_proc=5): 100%|██████████| 32/32 [00:00<00:00, 54.22 examples/s]
+
+←[1AMap (num_proc=5):   0%|          | 0/3968 [00:00<?, ? examples/s]
+←[1AMap (num_proc=5):   0%|          | 1/3968 [00:00<27:45,  2.38 examples/s]
+←[1AMap (num_proc=5):  40%|███▉      | 1587/3968 [00:00<00:00, 3940.84 examples/s]
+←[1AMap (num_proc=5):  82%|████████▏ | 3237/3968 [00:00<00:00, 4797.04 examples/s]
+←[1AMap (num_proc=5): 100%|██████████| 3968/3968 [00:00<00:00, 4092.16 examples/s]
+[2024-01-07 08:29:20,958] [DEBUG] [axolotl.log:60] [PID:27] [RANK:0] total_num_tokens: 428230←[39m
+[2024-01-07 08:29:21,005] [DEBUG] [axolotl.log:60] [PID:27] [RANK:0] `total_supervised_tokens: 171547`←[39m
+[2024-01-07 08:29:27,744] [INFO] [axolotl.utils.samplers.multipack._len_est:178] [PID:27] [RANK:0] packing_efficiency_estimate: 1.0 total_num_tokens per device: 214115←[39m
+[2024-01-07 08:29:27,745] [DEBUG] [axolotl.log:60] [PID:27] [RANK:0] data_loader_len: 5←[39m
+[2024-01-07 08:29:27,757] [INFO] [axolotl.utils.samplers.multipack._len_est:178] [PID:28] [RANK:1] packing_efficiency_estimate: 1.0 total_num_tokens per device: 214115←[39m
+[2024-01-07 08:29:27,802] [INFO] [axolotl.log:60] [PID:27] [RANK:0] sample_packing_eff_est across ranks: [0.9334673285484314, 0.9334673285484314]←[39m
+[2024-01-07 08:29:27,967] [DEBUG] [axolotl.log:60] [PID:27] [RANK:0] sample_packing_eff_est: 0.94←[39m
+[2024-01-07 08:29:27,968] [DEBUG] [axolotl.log:60] [PID:27] [RANK:0] total_num_steps: 12←[39m
+[2024-01-07 08:29:27,968] [INFO] [axolotl.scripts.load_datasets:320] [PID:27] [RANK:0] check_dataset_labels...←[39m
+[2024-01-07 08:29:27,972] [INFO] [axolotl.scripts.load_datasets:320] [PID:28] [RANK:1] check_dataset_labels...←[39m
+[2024-01-07 08:29:27,986] [INFO] [axolotl.check_example_labels:35] [PID:27] [RANK:0] <s>(-100, 1) [(-100, 518) INST(-100, 25580) ](-100, 29962) Using(-100, 5293) the(-100, 278) schema(-100, 10938) context(-100, 3030) below(-100, 2400) ,(-100, 29892) generate(-100, 5706) a(-100, 263) SQL(-100, 3758) query(-100, 2346) that(-100, 393) answers(-100, 6089) the(-100, 278) question(-100, 1139) .(-100, 29889) <0x0A>(-100, 13) CREATE(-100, 27045) TABLE(-100, 10911) mountain(-100, 14378) ((-100, 313) Name(-100, 1170) VARCHAR(-100, 21748) ,(-100, 29892) Height(-100, 22907) VARCHAR(-100, 21748) )(-100, 29897) <0x0A>(-100, 13) What(-100, 5618) is(-100, 338) the(-100, 278) name(-100, 1024) of(-100, 310) the(-100, 278) highest(-100, 9939) mountain(-100, 14378) ?(-100, 29973) [(-100, 518) /(-100, 29914) INST(-100, 25580) ](-100, 29962) (-100, 29871) [(518, 518) SQL(4176, 4176) ](29962, 29962) SELECT(5097, 5097) Name(4408, 4408) FROM(3895, 3895) mountain(14378, 14378) ORDER(15606, 15606) BY(6770, 6770) Height(22907, 22907) DESC(23050, 23050) LIMIT(27848, 27848) (29871, 29871) 1(29896, 29896) [(518, 518) /(29914, 29914) SQL(4176, 4176) ](29962, 29962) </s>(2, 2)←[39m
+[2024-01-07 08:29:27,986] [INFO] [axolotl.check_example_labels:36] [PID:27] [RANK:0]
+
+
+←[39m
+[2024-01-07 08:29:27,995] [INFO] [axolotl.check_example_labels:35] [PID:28] [RANK:1] <s>(-100, 1) [(-100, 518) INST(-100, 25580) ](-100, 29962) Using(-100, 5293) the(-100, 278) schema(-100, 10938) context(-100, 3030) below(-100, 2400) ,(-100, 29892) generate(-100, 5706) a(-100, 263) SQL(-100, 3758) query(-100, 2346) that(-100, 393) answers(-100, 6089) the(-100, 278) question(-100, 1139) .(-100, 29889) <0x0A>(-100, 13) CREATE(-100, 27045) TABLE(-100, 10911) student(-100, 8368) ((-100, 313) l(-100, 29880) name(-100, 978) VARCHAR(-100, 21748) ,(-100, 29892) sex(-100, 7916) VARCHAR(-100, 21748) ,(-100, 29892) city(-100, 4272) _(-100, 29918) code(-100, 401) VARCHAR(-100, 21748) ,(-100, 29892) age(-100, 5046) VARCHAR(-100, 21748) )(-100, 29897) <0x0A>(-100, 13) Find(-100, 12542) the(-100, 278) last(-100, 1833) name(-100, 1024) of(-100, 310) students(-100, 8041) who(-100, 1058) is(-100, 338) either(-100, 2845) female(-100, 12944) ((-100, 313) sex(-100, 14167) is(-100, 338) F(-100, 383) )(-100, 29897) and(-100, 322) living(-100, 8471) in(-100, 297) the(-100, 278) city(-100, 4272) of(-100, 310) code(-100, 775) B(-100, 350) AL(-100, 1964) or(-100, 470) male(-100, 14263) ((-100, 313) sex(-100, 14167) is(-100, 338) M(-100, 341) )(-100, 29897) and(-100, 322) in(-100, 297) age(-100, 5046) of(-100, 310) below(-100, 2400) (-100, 29871) 2(-100, 29906) 0(-100, 29900) .(-100, 29889) [(-100, 518) /(-100, 29914) INST(-100, 25580) ](-100, 29962) (-100, 29871) [(518, 518) SQL(4176, 4176) ](29962, 29962) SELECT(5097, 5097) l(301, 301) name(978, 978) FROM(3895, 3895) student(8368, 8368) WHERE(5754, 5754) sex(7916, 7916) =(353, 353) '(525, 525) F(29943, 29943) '(29915, 29915) AND(5300, 5300) city(4272, 4272) _(29918, 29918) code(401, 401) =(353, 353) '(525, 525) B(29933, 29933) AL(1964, 1964) '(29915, 29915) UNION(25919, 25919) SELECT(5097, 5097) l(301, 301) name(978, 978) FROM(3895, 3895) student(8368, 8368) WHERE(5754, 5754) sex(7916, 7916) =(353, 353) '(525, 525) M(29924, 29924) '(29915, 29915) AND(5300, 5300) age(5046, 5046) <(529, 529) (29871, 29871) 2(29906, 29906) 0(29900, 29900) [(518, 518) /(29914, 29914) SQL(4176, 4176) ](29962, 29962) </s>(2, 2)←[39m
+[2024-01-07 08:29:27,995] [INFO] [axolotl.check_example_labels:36] [PID:28] [RANK:1]
+
+
+←[39m
+[2024-01-07 08:29:28,002] [INFO] [axolotl.check_example_labels:35] [PID:27] [RANK:0] <s>(-100, 1) [(-100, 518) INST(-100, 25580) ](-100, 29962) Using(-100, 5293) the(-100, 278) schema(-100, 10938) context(-100, 3030) below(-100, 2400) ,(-100, 29892) generate(-100, 5706) a(-100, 263) SQL(-100, 3758) query(-100, 2346) that(-100, 393) answers(-100, 6089) the(-100, 278) question(-100, 1139) .(-100, 29889) <0x0A>(-100, 13) CREATE(-100, 27045) TABLE(-100, 10911) station(-100, 5073) ((-100, 313) name(-100, 978) VARCHAR(-100, 21748) ,(-100, 29892) station(-100, 5073) _(-100, 29918) id(-100, 333) VARCHAR(-100, 21748) );(-100, 416) CREATE(-100, 14602) TABLE(-100, 10911) train(-100, 7945) _(-100, 29918) station(-100, 19569) ((-100, 313) station(-100, 19569) _(-100, 29918) id(-100, 333) VARCHAR(-100, 21748) )(-100, 29897) <0x0A>(-100, 13) Show(-100, 8964) the(-100, 278) station(-100, 5073) name(-100, 1024) with(-100, 411) greatest(-100, 14176) number(-100, 1353) of(-100, 310) trains(-100, 22983) .(-100, 29889) [(-100, 518) /(-100, 29914) INST(-100, 25580) ](-100, 29962) (-100, 29871) [(518, 518) SQL(4176, 4176) ](29962, 29962) SELECT(5097, 5097) T(323, 323) 2(29906, 29906) .(29889, 29889) name(978, 978) FROM(3895, 3895) train(7945, 7945) _(29918, 29918) station(19569, 19569) AS(3339, 3339) T(323, 323) 1(29896, 29896) JOIN(8780, 8780) station(5073, 5073) AS(3339, 3339) T(323, 323) 2(29906, 29906) ON(6732, 6732) T(323, 323) 1(29896, 29896) .(29889, 29889) station(19569, 19569) _(29918, 29918) id(333, 333) =(353, 353) T(323, 323) 2(29906, 29906) .(29889, 29889) station(19569, 19569) _(29918, 29918) id(333, 333) GROUP(15345, 15345) BY(6770, 6770) T(323, 323) 1(29896, 29896) .(29889, 29889) station(19569, 19569) _(29918, 29918) id(333, 333) ORDER(15606, 15606) BY(6770, 6770) COUNT(21122, 21122) (*)(22798, 22798) DESC(23050, 23050) LIMIT(27848, 27848) (29871, 29871) 1(29896, 29896) [(518, 518) /(29914, 29914) SQL(4176, 4176) ](29962, 29962) </s>(2, 2)←[39m
+[2024-01-07 08:29:28,002] [INFO] [axolotl.check_example_labels:36] [PID:27] [RANK:0]
+
+
+←[39m
+[2024-01-07 08:29:28,009] [INFO] [axolotl.check_example_labels:35] [PID:28] [RANK:1] <s>(-100, 1) [(-100, 518) INST(-100, 25580) ](-100, 29962) Using(-100, 5293) the(-100, 278) schema(-100, 10938) context(-100, 3030) below(-100, 2400) ,(-100, 29892) generate(-100, 5706) a(-100, 263) SQL(-100, 3758) query(-100, 2346) that(-100, 393) answers(-100, 6089) the(-100, 278) question(-100, 1139) .(-100, 29889) <0x0A>(-100, 13) CREATE(-100, 27045) TABLE(-100, 10911) entrepr(-100, 23440) ene(-100, 1600) ur(-100, 332) ((-100, 313) Name(-100, 1170) VARCHAR(-100, 21748) ,(-100, 29892) People(-100, 11647) _(-100, 29918) ID(-100, 1367) VARCHAR(-100, 21748) );(-100, 416) CREATE(-100, 14602) TABLE(-100, 10911) people(-100, 2305) ((-100, 313) Name(-100, 1170) VARCHAR(-100, 21748) ,(-100, 29892) People(-100, 11647) _(-100, 29918) ID(-100, 1367) VARCHAR(-100, 21748) )(-100, 29897) <0x0A>(-100, 13) List(-100, 1293) the(-100, 278) names(-100, 2983) of(-100, 310) people(-100, 2305) that(-100, 393) are(-100, 526) not(-100, 451) entrepr(-100, 23440) ene(-100, 1600) urs(-100, 1295) .(-100, 29889) [(-100, 518) /(-100, 29914) INST(-100, 25580) ](-100, 29962) (-100, 29871) [(518, 518) SQL(4176, 4176) ](29962, 29962) SELECT(5097, 5097) Name(4408, 4408) FROM(3895, 3895) people(2305, 2305) WHERE(5754, 5754) NOT(6058, 6058) People(11647, 11647) _(29918, 29918) ID(1367, 1367) IN(2672, 2672) ((313, 313) SELECT(6404, 6404) People(11647, 11647) _(29918, 29918) ID(1367, 1367) FROM(3895, 3895) entrepr(23440, 23440) ene(1600, 1600) ur(332, 332) )(29897, 29897) [(518, 518) /(29914, 29914) SQL(4176, 4176) ](29962, 29962) </s>(2, 2)←[39m
+[2024-01-07 08:29:28,009] [INFO] [axolotl.check_example_labels:36] [PID:28] [RANK:1]
+
+
+←[39m
+[2024-01-07 08:29:28,019] [INFO] [axolotl.check_example_labels:35] [PID:27] [RANK:0] <s>(-100, 1) [(-100, 518) INST(-100, 25580) ](-100, 29962) Using(-100, 5293) the(-100, 278) schema(-100, 10938) context(-100, 3030) below(-100, 2400) ,(-100, 29892) generate(-100, 5706) a(-100, 263) SQL(-100, 3758) query(-100, 2346) that(-100, 393) answers(-100, 6089) the(-100, 278) question(-100, 1139) .(-100, 29889) <0x0A>(-100, 13) CREATE(-100, 27045) TABLE(-100, 10911) courses(-100, 21888) ((-100, 313) course(-100, 15775) _(-100, 29918) name(-100, 978) VARCHAR(-100, 21748) ,(-100, 29892) course(-100, 3236) _(-100, 29918) id(-100, 333) VARCHAR(-100, 21748) );(-100, 416) CREATE(-100, 14602) TABLE(-100, 10911) student(-100, 8368) _(-100, 29918) course(-100, 15775) _(-100, 29918) registr(-100, 29238) ations(-100, 800) ((-100, 313) course(-100, 15775) _(-100, 29918) Id(-100, 1204) VARCHAR(-100, 21748) )(-100, 29897) <0x0A>(-100, 13) which(-100, 4716) course(-100, 3236) has(-100, 756) most(-100, 1556) number(-100, 1353) of(-100, 310) registered(-100, 15443) students(-100, 8041) ?(-100, 29973) [(-100, 518) /(-100, 29914) INST(-100, 25580) ](-100, 29962) (-100, 29871) [(518, 518) SQL(4176, 4176) ](29962, 29962) SELECT(5097, 5097) T(323, 323) 1(29896, 29896) .(29889, 29889) course(15775, 15775) _(29918, 29918) name(978, 978) FROM(3895, 3895) courses(21888, 21888) AS(3339, 3339) T(323, 323) 1(29896, 29896) JOIN(8780, 8780) student(8368, 8368) _(29918, 29918) course(15775, 15775) _(29918, 29918) registr(29238, 29238) ations(800, 800) AS(3339, 3339) T(323, 323) 2(29906, 29906) ON(6732, 6732) T(323, 323) 1(29896, 29896) .(29889, 29889) course(15775, 15775) _(29918, 29918) id(333, 333) =(353, 353) T(323, 323) 2(29906, 29906) .(29889, 29889) course(15775, 15775) _(29918, 29918) Id(1204, 1204) GROUP(15345, 15345) BY(6770, 6770) T(323, 323) 1(29896, 29896) .(29889, 29889) course(15775, 15775) _(29918, 29918) id(333, 333) ORDER(15606, 15606) BY(6770, 6770) COUNT(21122, 21122) (*)(22798, 22798) DESC(23050, 23050) LIMIT(27848, 27848) (29871, 29871) 1(29896, 29896) [(518, 518) /(29914, 29914) SQL(4176, 4176) ](29962, 29962) </s>(2, 2)←[39m
+[2024-01-07 08:29:28,019] [INFO] [axolotl.check_example_labels:36] [PID:27] [RANK:0]
+
+
+←[39m
+[2024-01-07 08:29:28,028] [INFO] [axolotl.check_example_labels:35] [PID:28] [RANK:1] <s>(-100, 1) [(-100, 518) INST(-100, 25580) ](-100, 29962) Using(-100, 5293) the(-100, 278) schema(-100, 10938) context(-100, 3030) below(-100, 2400) ,(-100, 29892) generate(-100, 5706) a(-100, 263) SQL(-100, 3758) query(-100, 2346) that(-100, 393) answers(-100, 6089) the(-100, 278) question(-100, 1139) .(-100, 29889) <0x0A>(-100, 13) CREATE(-100, 27045) TABLE(-100, 10911) CO(-100, 4810) UR(-100, 4574) SE(-100, 1660) ((-100, 313) D(-100, 29928) NO(-100, 6632) VARCHAR(-100, 21748) ,(-100, 29892) C(-100, 315) Name(-100, 1170) VARCHAR(-100, 21748) );(-100, 416) CREATE(-100, 14602) TABLE(-100, 10911) DE(-100, 5012) PART(-100, 26092) MENT(-100, 13780) ((-100, 313) D(-100, 29928) name(-100, 978) VARCHAR(-100, 21748) ,(-100, 29892) Room(-100, 25114) VARCHAR(-100, 21748) ,(-100, 29892) D(-100, 360) NO(-100, 6632) VARCHAR(-100, 21748) )(-100, 29897) <0x0A>(-100, 13) Find(-100, 12542) the(-100, 278) department(-100, 14311) name(-100, 1024) and(-100, 322) room(-100, 5716) of(-100, 310) the(-100, 278) course(-100, 3236) INT(-100, 19578) RO(-100, 1672) DU(-100, 14849) CTION(-100, 9838) TO(-100, 7495) CO(-100, 4810) MP(-100, 3580) UT(-100, 2692) ER(-100, 1001) S(-100, 317) CI(-100, 8426) EN(-100, 1430) CE(-100, 4741) .(-100, 29889) [(-100, 518) /(-100, 29914) INST(-100, 25580) ](-100, 29962) (-100, 29871) [(518, 518) SQL(4176, 4176) ](29962, 29962) SELECT(5097, 5097) T(323, 323) 2(29906, 29906) .(29889, 29889) D(29928, 29928) name(978, 978) ,(29892, 29892) T(323, 323) 2(29906, 29906) .(29889, 29889) Ro(9588, 9588) om(290, 290) FROM(3895, 3895) CO(4810, 4810) UR(4574, 4574) SE(1660, 1660) AS(3339, 3339) T(323, 323) 1(29896, 29896) JOIN(8780, 8780) DE(5012, 5012) PART(26092, 26092) MENT(13780, 13780) AS(3339, 3339) T(323, 323) 2(29906, 29906) ON(6732, 6732) T(323, 323) 1(29896, 29896) .(29889, 29889) D(29928, 29928) NO(6632, 6632) =(353, 353) T(323, 323) 2(29906, 29906) .(29889, 29889) D(29928, 29928) NO(6632, 6632) WHERE(5754, 5754) T(323, 323) 1(29896, 29896) .(29889, 29889) C(29907, 29907) Name(1170, 1170) =(353, 353) "(376, 376) INT(10192, 10192) RO(1672, 1672) DU(14849, 14849) CTION(9838, 9838) TO(7495, 7495) CO(4810, 4810) MP(3580, 3580) UT(2692, 2692) ER(1001, 1001) S(317, 317) CI(8426, 8426) EN(1430, 1430) CE(4741, 4741) "(29908, 29908) [(518, 518) /(29914, 29914) SQL(4176, 4176) ](29962, 29962) </s>(2, 2)←[39m
+[2024-01-07 08:29:28,028] [INFO] [axolotl.check_example_labels:36] [PID:28] [RANK:1]
+
+
+←[39m
+[2024-01-07 08:29:28,041] [INFO] [axolotl.check_example_labels:35] [PID:28] [RANK:1] <s>(-100, 1) [(-100, 518) INST(-100, 25580) ](-100, 29962) Using(-100, 5293) the(-100, 278) schema(-100, 10938) context(-100, 3030) below(-100, 2400) ,(-100, 29892) generate(-100, 5706) a(-100, 263) SQL(-100, 3758) query(-100, 2346) that(-100, 393) answers(-100, 6089) the(-100, 278) question(-100, 1139) .(-100, 29889) <0x0A>(-100, 13) CREATE(-100, 27045) TABLE(-100, 10911) Gu(-100, 2088) ests(-100, 9197) ((-100, 313) gender(-100, 26098) _(-100, 29918) code(-100, 401) VARCHAR(-100, 21748) )(-100, 29897) <0x0A>(-100, 13) Show(-100, 8964) each(-100, 1269) gender(-100, 23346) code(-100, 775) and(-100, 322) the(-100, 278) corresponding(-100, 6590) count(-100, 2302) of(-100, 310) guests(-100, 28865) sorted(-100, 12705) by(-100, 491) the(-100, 278) count(-100, 2302) in(-100, 297) desc(-100, 5153) ending(-100, 2548) order(-100, 1797) .(-100, 29889) [(-100, 518) /(-100, 29914) INST(-100, 25580) ](-100, 29962) (-100, 29871) [(518, 518) SQL(4176, 4176) ](29962, 29962) SELECT(5097, 5097) gender(23346, 23346) _(29918, 29918) code(401, 401) ,(29892, 29892) COUNT(21122, 21122) (*)(22798, 22798) FROM(3895, 3895) Gu(2088, 2088) ests(9197, 9197) GROUP(15345, 15345) BY(6770, 6770) gender(23346, 23346) _(29918, 29918) code(401, 401) ORDER(15606, 15606) BY(6770, 6770) COUNT(21122, 21122) (*)(22798, 22798) DESC(23050, 23050) [(518, 518) /(29914, 29914) SQL(4176, 4176) ](29962, 29962) </s>(2, 2)←[39m
+[2024-01-07 08:29:28,041] [INFO] [axolotl.check_example_labels:36] [PID:28] [RANK:1]
+
+
+←[39m
+[2024-01-07 08:29:28,043] [INFO] [axolotl.check_example_labels:35] [PID:27] [RANK:0] <s>(-100, 1) [(-100, 518) INST(-100, 25580) ](-100, 29962) Using(-100, 5293) the(-100, 278) schema(-100, 10938) context(-100, 3030) below(-100, 2400) ,(-100, 29892) generate(-100, 5706) a(-100, 263) SQL(-100, 3758) query(-100, 2346) that(-100, 393) answers(-100, 6089) the(-100, 278) question(-100, 1139) .(-100, 29889) <0x0A>(-100, 13) CREATE(-100, 27045) TABLE(-100, 10911) Ass(-100, 4007) igned(-100, 12961) To(-100, 1762) ((-100, 313) S(-100, 29903) cient(-100, 15566) ist(-100, 391) VARCHAR(-100, 21748) ,(-100, 29892) Project(-100, 8010) VARCHAR(-100, 21748) );(-100, 416) CREATE(-100, 14602) TABLE(-100, 10911) Project(-100, 8010) s(-100, 29879) ((-100, 313) Name(-100, 1170) VARCHAR(-100, 21748) ,(-100, 29892) H(-100, 379) ours(-100, 2470) VARCHAR(-100, 21748) ,(-100, 29892) Code(-100, 5920) VARCHAR(-100, 21748) );(-100, 416) CREATE(-100, 14602) TABLE(-100, 10911) Scient(-100, 23753) ists(-100, 2879) ((-100, 313) Name(-100, 1170) VARCHAR(-100, 21748) ,(-100, 29892) SS(-100, 5886) N(-100, 29940) VARCHAR(-100, 21748) )(-100, 29897) <0x0A>(-100, 13) List(-100, 1293) all(-100, 599) the(-100, 278) scient(-100, 9638) ists(-100, 2879) '(-100, 29915) names(-100, 2983) ,(-100, 29892) their(-100, 1009) projects(-100, 9279) '(-100, 29915) names(-100, 2983) ,(-100, 29892) and(-100, 322) the(-100, 278) hours(-100, 6199) worked(-100, 3796) by(-100, 491) that(-100, 393) scient(-100, 9638) ist(-100, 391) on(-100, 373) each(-100, 1269) project(-100, 2060) ,(-100, 29892) in(-100, 297) alphabet(-100, 22968) ical(-100, 936) order(-100, 1797) of(-100, 310) project(-100, 2060) name(-100, 1024) ,(-100, 29892) and(-100, 322) then(-100, 769) scient(-100, 9638) ist(-100, 391) name(-100, 1024) .(-100, 29889) [(-100, 518) /(-100, 29914) INST(-100, 25580) ](-100, 29962) (-100, 29871) [(518, 518) SQL(4176, 4176) ](29962, 29962) SELECT(5097, 5097) T(323, 323) 1(29896, 29896) .(29889, 29889) Name(1170, 1170) ,(29892, 29892) T(323, 323) 3(29941, 29941) .(29889, 29889) Name(1170, 1170) ,(29892, 29892) T(323, 323) 3(29941, 29941) .(29889, 29889) H(29950, 29950) ours(2470, 2470) FROM(3895, 3895) Scient(23753, 23753) ists(2879, 2879) AS(3339, 3339) T(323, 323) 1(29896, 29896) JOIN(8780, 8780) Ass(4007, 4007) igned(12961, 12961) To(1762, 1762) AS(3339, 3339) T(323, 323) 2(29906, 29906) ON(6732, 6732) T(323, 323) 1(29896, 29896) .(29889, 29889) SSN(13429, 13429) =(353, 353) T(323, 323) 2(29906, 29906) .(29889, 29889) S(29903, 29903) cient(15566, 15566) ist(391, 391) JOIN(8780, 8780) Project(8010, 8010) s(29879, 29879) AS(3339, 3339) T(323, 323) 3(29941, 29941) ON(6732, 6732) T(323, 323) 2(29906, 29906) .(29889, 29889) Project(7653, 7653) =(353, 353) T(323, 323) 3(29941, 29941) .(29889, 29889) Code(3399, 3399) ORDER(15606, 15606) BY(6770, 6770) T(323, 323) 3(29941, 29941) .(29889, 29889) Name(1170, 1170) ,(29892, 29892) T(323, 323) 1(29896, 29896) .(29889, 29889) Name(1170, 1170) [(518, 518) /(29914, 29914) SQL(4176, 4176) ](29962, 29962) </s>(2, 2)←[39m
+[2024-01-07 08:29:28,043] [INFO] [axolotl.check_example_labels:36] [PID:27] [RANK:0]
+
+
+←[39m
+[2024-01-07 08:29:28,058] [INFO] [axolotl.check_example_labels:35] [PID:27] [RANK:0] <s>(-100, 1) [(-100, 518) INST(-100, 25580) ](-100, 29962) Using(-100, 5293) the(-100, 278) schema(-100, 10938) context(-100, 3030) below(-100, 2400) ,(-100, 29892) generate(-100, 5706) a(-100, 263) SQL(-100, 3758) query(-100, 2346) that(-100, 393) answers(-100, 6089) the(-100, 278) question(-100, 1139) .(-100, 29889) <0x0A>(-100, 13) CREATE(-100, 27045) TABLE(-100, 10911) Project(-100, 8010) _(-100, 29918) St(-100, 855) aff(-100, 3470) ((-100, 313) role(-100, 12154) _(-100, 29918) code(-100, 401) VARCHAR(-100, 21748) ,(-100, 29892) date(-100, 2635) _(-100, 29918) from(-100, 3166) VARCHAR(-100, 21748) )(-100, 29897) <0x0A>(-100, 13) How(-100, 5328) many(-100, 1784) project(-100, 2060) staff(-100, 13925) worked(-100, 3796) as(-100, 408) leaders(-100, 20251) or(-100, 470) started(-100, 4687) working(-100, 1985) before(-100, 1434) '(-100, 525) 1(-100, 29896) 9(-100, 29929) 8(-100, 29947) 9(-100, 29929) -(-100, 29899) 0(-100, 29900) 4(-100, 29946) -(-100, 29899) 2(-100, 29906) 4(-100, 29946) (-100, 29871) 2(-100, 29906) 3(-100, 29941) :(-100, 29901) 5(-100, 29945) 1(-100, 29896) :(-100, 29901) 5(-100, 29945) 4(-100, 29946) '(-100, 29915) ?(-100, 29973) [(-100, 518) /(-100, 29914) INST(-100, 25580) ](-100, 29962) (-100, 29871) [(518, 518) SQL(4176, 4176) ](29962, 29962) SELECT(5097, 5097) COUNT(21122, 21122) (*)(22798, 22798) FROM(3895, 3895) Project(8010, 8010) _(29918, 29918) St(855, 855) aff(3470, 3470) WHERE(5754, 5754) role(6297, 6297) _(29918, 29918) code(401, 401) =(353, 353) '(525, 525) le(280, 280) ader(1664, 1664) '(29915, 29915) OR(6323, 6323) date(2635, 2635) _(29918, 29918) from(3166, 3166) <(529, 529) '(525, 525) 1(29896, 29896) 9(29929, 29929) 8(29947, 29947) 9(29929, 29929) -(29899, 29899) 0(29900, 29900) 4(29946, 29946) -(29899, 29899) 2(29906, 29906) 4(29946, 29946) (29871, 29871) 2(29906, 29906) 3(29941, 29941) :(29901, 29901) 5(29945, 29945) 1(29896, 29896) :(29901, 29901) 5(29945, 29945) 4(29946, 29946) '(29915, 29915) [(518, 518) /(29914, 29914) SQL(4176, 4176) ](29962, 29962) </s>(2, 2)←[39m
+[2024-01-07 08:29:28,059] [INFO] [axolotl.check_example_labels:35] [PID:28] [RANK:1] <s>(-100, 1) [(-100, 518) INST(-100, 25580) ](-100, 29962) Using(-100, 5293) the(-100, 278) schema(-100, 10938) context(-100, 3030) below(-100, 2400) ,(-100, 29892) generate(-100, 5706) a(-100, 263) SQL(-100, 3758) query(-100, 2346) that(-100, 393) answers(-100, 6089) the(-100, 278) question(-100, 1139) .(-100, 29889) <0x0A>(-100, 13) CREATE(-100, 27045) TABLE(-100, 10911) teachers(-100, 27335) ((-100, 313) class(-100, 1990) room(-100, 8345) VARCHAR(-100, 21748) );(-100, 416) CREATE(-100, 14602) TABLE(-100, 10911) list(-100, 1051) ((-100, 313) class(-100, 1990) room(-100, 8345) VARCHAR(-100, 21748) ,(-100, 29892) first(-100, 937) name(-100, 978) VARCHAR(-100, 21748) ,(-100, 29892) last(-100, 1833) name(-100, 978) VARCHAR(-100, 21748) )(-100, 29897) <0x0A>(-100, 13) How(-100, 5328) many(-100, 1784) teachers(-100, 27335) does(-100, 947) the(-100, 278) student(-100, 8368) named(-100, 4257) CH(-100, 5868) RI(-100, 3960) SS(-100, 1799) Y(-100, 29979) N(-100, 405) AB(-100, 2882) O(-100, 29949) Z(-100, 29999) N(-100, 29940) Y(-100, 29979) have(-100, 505) ?(-100, 29973) [(-100, 518) /(-100, 29914) INST(-100, 25580) ](-100, 29962) (-100, 29871) [(518, 518) SQL(4176, 4176) ](29962, 29962) SELECT(5097, 5097) COUNT(21122, 21122) (*)(22798, 22798) FROM(3895, 3895) list(1051, 1051) AS(3339, 3339) T(323, 323) 1(29896, 29896) JOIN(8780, 8780) teachers(27335, 27335) AS(3339, 3339) T(323, 323) 2(29906, 29906) ON(6732, 6732) T(323, 323) 1(29896, 29896) .(29889, 29889) class(1990, 1990) room(8345, 8345) =(353, 353) T(323, 323) 2(29906, 29906) .(29889, 29889) class(1990, 1990) room(8345, 8345) WHERE(5754, 5754) T(323, 323) 1(29896, 29896) .(29889, 29889) first(4102, 4102) name(978, 978) =(353, 353) "(376, 376) CH(3210, 3210) RI(3960, 3960) SS(1799, 1799) Y(29979, 29979) "(29908, 29908) AND(5300, 5300) T(323, 323) 1(29896, 29896) .(29889, 29889) last(4230, 4230) name(978, 978) =(353, 353) "(376, 376) N(29940, 29940) AB(2882, 2882) O(29949, 29949) Z(29999, 29999) N(29940, 29940) Y(29979, 29979) "(29908, 29908) [(518, 518) /(29914, 29914) SQL(4176, 4176) ](29962, 29962) </s>(2, 2)←[39m
+[2024-01-07 08:29:28,059] [INFO] [axolotl.check_example_labels:36] [PID:27] [RANK:0]
+
+
+←[39m
+[2024-01-07 08:29:28,059] [INFO] [axolotl.check_example_labels:36] [PID:28] [RANK:1]
+
+
+←[39m
+[2024-01-07 08:29:28,059] [INFO] [axolotl.scripts.load_datasets:333] [PID:27] [RANK:0] printing prompters...←[39m
+[2024-01-07 08:29:28,059] [INFO] [axolotl.scripts.load_datasets:333] [PID:28] [RANK:1] printing prompters...←[39m
+[2024-01-07 08:29:28,059] [INFO] [axolotl.scripts.load_datasets:335] [PID:27] [RANK:0] Pre-tokenized or custom dataset types are unsupported for logging←[39m
+[2024-01-07 08:29:28,059] [INFO] [axolotl.scripts.load_datasets:335] [PID:28] [RANK:1] Pre-tokenized or custom dataset types are unsupported for logging←[39m
+[2024-01-07 08:29:28,069] [DEBUG] [axolotl.train.log:60] [PID:27] [RANK:0] loading tokenizer... codellama/CodeLlama-7b-Instruct-hf←[39m
+[2024-01-07 08:29:28,508] [DEBUG] [axolotl.load_tokenizer:172] [PID:27] [RANK:0] EOS: 2 / </s>←[39m
+[2024-01-07 08:29:28,509] [DEBUG] [axolotl.load_tokenizer:173] [PID:27] [RANK:0] BOS: 1 / <s>←[39m
+[2024-01-07 08:29:28,509] [DEBUG] [axolotl.load_tokenizer:174] [PID:27] [RANK:0] PAD: 2 / </s>←[39m
+[2024-01-07 08:29:28,509] [DEBUG] [axolotl.load_tokenizer:175] [PID:27] [RANK:0] UNK: 0 / <unk>←[39m
+[2024-01-07 08:29:28,509] [DEBUG] [axolotl.train.log:60] [PID:27] [RANK:0] loading model and peft_config...←[39m
+[2024-01-07 08:29:28,519] [DEBUG] [axolotl.load_tokenizer:172] [PID:28] [RANK:1] EOS: 2 / </s>←[39m
+[2024-01-07 08:29:28,520] [DEBUG] [axolotl.load_tokenizer:173] [PID:28] [RANK:1] BOS: 1 / <s>←[39m
+[2024-01-07 08:29:28,520] [DEBUG] [axolotl.load_tokenizer:174] [PID:28] [RANK:1] PAD: 2 / </s>←[39m
+[2024-01-07 08:29:28,520] [DEBUG] [axolotl.load_tokenizer:175] [PID:28] [RANK:1] UNK: 0 / <unk>←[39m
+[2024-01-07 08:29:28,833] [INFO] [axolotl.load_model:220] [PID:27] [RANK:0] patching with flash attention for sample packing←[39m
+[2024-01-07 08:29:28,833] [INFO] [axolotl.load_model:220] [PID:28] [RANK:1] patching with flash attention for sample packing←[39m
+[2024-01-07 08:29:28,836] [INFO] [axolotl.load_model:273] [PID:27] [RANK:0] patching _expand_mask←[39m
+[2024-01-07 08:29:28,837] [INFO] [axolotl.load_model:273] [PID:28] [RANK:1] patching _expand_mask←[39m
+
+←[1ALoading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]
+
+←[1ALoading checkpoint shards:  50%|█████     | 1/2 [00:18<00:18, 18.82s/it]
+←[1ALoading checkpoint shards:  50%|█████     | 1/2 [00:19<00:19, 19.06s/it]
+←[1ALoading checkpoint shards: 100%|██████████| 2/2 [00:31<00:00, 14.92s/it]
+←[1ALoading checkpoint shards: 100%|██████████| 2/2 [00:31<00:00, 15.50s/it]
+
+←[1ALoading checkpoint shards: 100%|██████████| 2/2 [00:31<00:00, 14.97s/it]
+←[1ALoading checkpoint shards: 100%|██████████| 2/2 [00:31<00:00, 15.58s/it]
+[2024-01-07 08:30:02,092] [INFO] [axolotl.load_model:493] [PID:27] [RANK:0] GPU memory usage after model load: 12.802GB (+0.009GB cache, +2.011GB misc)←[39m
+[2024-01-07 08:30:02,113] [INFO] [axolotl.load_model:528] [PID:27] [RANK:0] converting modules to torch.bfloat16 for flash attention←[39m
+[2024-01-07 08:30:02,118] [INFO] [axolotl.load_lora:631] [PID:27] [RANK:0] found linear modules: ['q_proj', 'o_proj', 'gate_proj', 'up_proj', 'down_proj', 'k_proj', 'v_proj']←[39m
+[2024-01-07 08:30:02,278] [INFO] [axolotl.load_model:493] [PID:28] [RANK:1] GPU memory usage after model load: 12.802GB (+0.009GB cache, +2.011GB misc)←[39m
+[2024-01-07 08:30:02,284] [INFO] [axolotl.load_model:528] [PID:28] [RANK:1] converting modules to torch.bfloat16 for flash attention←[39m
+[2024-01-07 08:30:02,288] [INFO] [axolotl.load_lora:631] [PID:28] [RANK:1] found linear modules: ['q_proj', 'o_proj', 'gate_proj', 'up_proj', 'down_proj', 'k_proj', 'v_proj']←[39m
+[2024-01-07 08:30:02,405] [WARNING] [auto_gptq.nn_modules.qlinear.qlinear_cuda.<module>:16] [PID:28] CUDA extension not installed.
+[2024-01-07 08:30:02,405] [WARNING] [auto_gptq.nn_modules.qlinear.qlinear_cuda.<module>:16] [PID:27] CUDA extension not installed.
+[2024-01-07 08:30:02,409] [WARNING] [auto_gptq.nn_modules.qlinear.qlinear_cuda_old.<module>:15] [PID:28] CUDA extension not installed.
+[2024-01-07 08:30:02,409] [WARNING] [auto_gptq.nn_modules.qlinear.qlinear_cuda_old.<module>:15] [PID:27] CUDA extension not installed.
+trainable params: 39,976,960 || all params: 6,778,523,648 || trainable%: 0.5897590991188056
+[2024-01-07 08:30:03,226] [INFO] [axolotl.load_model:558] [PID:27] [RANK:0] GPU memory usage after adapters: 12.950GB (+0.997GB cache, +2.011GB misc)←[39m
+trainable params: 39,976,960 || all params: 6,778,523,648 || trainable%: 0.5897590991188056
+[2024-01-07 08:30:03,273] [INFO] [axolotl.train.log:60] [PID:27] [RANK:0] Pre-saving adapter config to ./lora-out←[39m
+[2024-01-07 08:30:03,282] [INFO] [axolotl.load_model:558] [PID:28] [RANK:1] GPU memory usage after adapters: 12.950GB (+0.997GB cache, +2.011GB misc)←[39m
+[2024-01-07 08:30:03,287] [INFO] [axolotl.train.log:60] [PID:27] [RANK:0] Starting trainer...←[39m
+[2024-01-07 08:30:03,683] [INFO] [axolotl.utils.samplers.multipack._len_est:178] [PID:28] [RANK:1] packing_efficiency_estimate: 0.94 total_num_tokens per device: 214115←[39m
+[2024-01-07 08:30:03,683] [INFO] [axolotl.utils.samplers.multipack._len_est:178] [PID:27] [RANK:0] packing_efficiency_estimate: 0.94 total_num_tokens per device: 214115←[39m
+[2024-01-07 08:30:03,687] [INFO] [axolotl.utils.samplers.multipack._len_est:178] [PID:28] [RANK:1] packing_efficiency_estimate: 0.94 total_num_tokens per device: 214115←[39m
+[2024-01-07 08:30:03,687] [INFO] [axolotl.utils.samplers.multipack._len_est:178] [PID:27] [RANK:0] packing_efficiency_estimate: 0.94 total_num_tokens per device: 214115←[39m
+[2024-01-07 08:30:03,690] [INFO] [axolotl.utils.samplers.multipack._len_est:178] [PID:28] [RANK:1] packing_efficiency_estimate: 0.94 total_num_tokens per device: 214115←[39m
+[2024-01-07 08:30:03,691] [INFO] [axolotl.utils.samplers.multipack._len_est:178] [PID:27] [RANK:0] packing_efficiency_estimate: 0.94 total_num_tokens per device: 214115←[39m
+[2024-01-07 08:30:03,694] [INFO] [axolotl.utils.samplers.multipack._len_est:178] [PID:28] [RANK:1] packing_efficiency_estimate: 0.94 total_num_tokens per device: 214115←[39m
+[2024-01-07 08:30:03,694] [INFO] [axolotl.utils.samplers.multipack._len_est:178] [PID:27] [RANK:0] packing_efficiency_estimate: 0.94 total_num_tokens per device: 214115←[39m
+[2024-01-07 08:30:03,861] [INFO] [real_accelerator.py:161:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2024-01-07 08:30:03,861] [INFO] [real_accelerator.py:161:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+Using /root/.cache/torch_extensions/py310_cu118 as PyTorch extensions root...
+Creating extension directory /root/.cache/torch_extensions/py310_cu118/fused_adam...
+Using /root/.cache/torch_extensions/py310_cu118 as PyTorch extensions root...
+Detected CUDA files, patching ldflags
+Emitting ninja build file /root/.cache/torch_extensions/py310_cu118/fused_adam/build.ninja...
+Building extension module fused_adam...
+Allowing ninja to set a default number of workers... (overridable by setting the environment variable MAX_JOBS=N)
+[1/3] c++ -MMD -MF fused_adam_frontend.o.d -DTORCH_EXTENSION_NAME=fused_adam -DTORCH_API_INCLUDE_EXTENSION_H -DPYBIND11_COMPILER_TYPE=\"_gcc\" -DPYBIND11_STDLIB=\"_libstdcpp\" -DPYBIND11_BUILD_ABI=\"_cxxabi1011\" -I/root/miniconda3/envs/py3.10/lib/python3.10/site-packages/deepspeed/ops/csrc/includes -I/root/miniconda3/envs/py3.10/lib/python3.10/site-packages/deepspeed/ops/csrc/adam -isystem /root/miniconda3/envs/py3.10/lib/python3.10/site-packages/torch/include -isystem /root/miniconda3/envs/py3.10/lib/python3.10/site-packages/torch/include/torch/csrc/api/include -isystem /root/miniconda3/envs/py3.10/lib/python3.10/site-packages/torch/include/TH -isystem /root/miniconda3/envs/py3.10/lib/python3.10/site-packages/torch/include/THC -isystem /usr/local/cuda/include -isystem /root/miniconda3/envs/py3.10/include/python3.10 -D_GLIBCXX_USE_CXX11_ABI=0 -fPIC -std=c++17 -O3 -std=c++17 -g -Wno-reorder -DVERSION_GE_1_1 -DVERSION_GE_1_3 -DVERSION_GE_1_5 -DBF16_AVAILABLE -c /root/miniconda3/envs/py3.10/lib/python3.10/site-packages/deepspeed/ops/csrc/adam/fused_adam_frontend.cpp -o fused_adam_frontend.o
+[2/3] /usr/local/cuda/bin/nvcc  -DTORCH_EXTENSION_NAME=fused_adam -DTORCH_API_INCLUDE_EXTENSION_H -DPYBIND11_COMPILER_TYPE=\"_gcc\" -DPYBIND11_STDLIB=\"_libstdcpp\" -DPYBIND11_BUILD_ABI=\"_cxxabi1011\" -I/root/miniconda3/envs/py3.10/lib/python3.10/site-packages/deepspeed/ops/csrc/includes -I/root/miniconda3/envs/py3.10/lib/python3.10/site-packages/deepspeed/ops/csrc/adam -isystem /root/miniconda3/envs/py3.10/lib/python3.10/site-packages/torch/include -isystem /root/miniconda3/envs/py3.10/lib/python3.10/site-packages/torch/include/torch/csrc/api/include -isystem /root/miniconda3/envs/py3.10/lib/python3.10/site-packages/torch/include/TH -isystem /root/miniconda3/envs/py3.10/lib/python3.10/site-packages/torch/include/THC -isystem /usr/local/cuda/include -isystem /root/miniconda3/envs/py3.10/include/python3.10 -D_GLIBCXX_USE_CXX11_ABI=0 -D__CUDA_NO_HALF_OPERATORS__ -D__CUDA_NO_HALF_CONVERSIONS__ -D__CUDA_NO_BFLOAT16_CONVERSIONS__ -D__CUDA_NO_HALF2_OPERATORS__ --expt-relaxed-constexpr -gencode=arch=compute_80,code=compute_80 -gencode=arch=compute_80,code=sm_80 --compiler-options '-fPIC' -O3 -DVERSION_GE_1_1 -DVERSION_GE_1_3 -DVERSION_GE_1_5 -lineinfo --use_fast_math -gencode=arch=compute_80,code=sm_80 -gencode=arch=compute_80,code=compute_80 -DBF16_AVAILABLE -U__CUDA_NO_BFLOAT16_OPERATORS__ -U__CUDA_NO_BFLOAT162_OPERATORS__ -std=c++17 -c /root/miniconda3/envs/py3.10/lib/python3.10/site-packages/deepspeed/ops/csrc/adam/multi_tensor_adam.cu -o multi_tensor_adam.cuda.o
+[3/3] c++ fused_adam_frontend.o multi_tensor_adam.cuda.o -shared -L/root/miniconda3/envs/py3.10/lib/python3.10/site-packages/torch/lib -lc10 -lc10_cuda -ltorch_cpu -ltorch_cuda -ltorch -ltorch_python -L/usr/local/cuda/lib64 -lcudart -o fused_adam.so
+Loading extension module fused_adam...
+Time to load fused_adam op: 46.519306898117065 seconds
+Loading extension module fused_adam...
+Time to load fused_adam op: 46.5736882686615 seconds
+Parameter Offload: Total persistent parameters: 266240 in 65 params
+\ Running (1/1 containers active)... View app at https://modal.com/ayeshaamjad0828/apps/ap-OLRcilArSgMsZvLLtGbOga2024-01-07T13:31:09+0500 Loop attempt failed for _run_stub.<locals>.<lambda> (time_elapsed=0.7104225158691406)
+Traceback (most recent call last):
+  File "c:\Users\ayesha.amjad\AppData\Local\Programs\Python\Python310\lib\site-packages\modal_utils\async_utils.py", line 178, in loop_coro
+    await asyncio.wait_for(async_f(), timeout=timeout)
+  File "c:\Users\ayesha.amjad\AppData\Local\Programs\Python\Python310\lib\asyncio\tasks.py", line 447, in wait_for
+    return fut.result()
+  File "c:\Users\ayesha.amjad\AppData\Local\Programs\Python\Python310\lib\site-packages\modal\runner.py", line 33, in _heartbeat
+    await retry_transient_errors(client.stub.AppHeartbeat, request, attempt_timeout=HEARTBEAT_TIMEOUT)
+  File "c:\Users\ayesha.amjad\AppData\Local\Programs\Python\Python310\lib\site-packages\modal_utils\grpc_utils.py", line 261, in retry_transient_errors
+    raise exc
+  File "c:\Users\ayesha.amjad\AppData\Local\Programs\Python\Python310\lib\site-packages\modal_utils\grpc_utils.py", line 255, in retry_transient_errors
+    return await fn(*args, metadata=metadata, timeout=timeout)
+  File "c:\Users\ayesha.amjad\AppData\Local\Programs\Python\Python310\lib\site-packages\grpclib\client.py", line 881, in __call__
+    await stream.send_message(message, end=True)
+  File "c:\Users\ayesha.amjad\AppData\Local\Programs\Python\Python310\lib\site-packages\grpclib\client.py", line 241, in send_message
+    await self.send_request()
+  File "c:\Users\ayesha.amjad\AppData\Local\Programs\Python\Python310\lib\site-packages\grpclib\client.py", line 173, in send_request
+    protocol = await self._channel.__connect__()
+  File "c:\Users\ayesha.amjad\AppData\Local\Programs\Python\Python310\lib\site-packages\modal_utils\grpc_utils.py", line 117, in __connect__
+    protocol = await self._create_connection()
+  File "c:\Users\ayesha.amjad\AppData\Local\Programs\Python\Python310\lib\site-packages\grpclib\client.py", line 711, in _create_connection
+    _, protocol = await self._loop.create_connection(
+  File "c:\Users\ayesha.amjad\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 1016, in create_connection
+    infos = await self._ensure_resolved(
+  File "c:\Users\ayesha.amjad\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 1395, in _ensure_resolved
+    return await loop.getaddrinfo(host, port, family=family, type=type,
+  File "c:\Users\ayesha.amjad\AppData\Local\Programs\Python\Python310\lib\asyncio\base_events.py", line 855, in getaddrinfo
+    return await self.run_in_executor(
+  File "c:\Users\ayesha.amjad\AppData\Local\Programs\Python\Python310\lib\concurrent\futures\thread.py", line 52, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "c:\Users\ayesha.amjad\AppData\Local\Programs\Python\Python310\lib\socket.py", line 955, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno 11001] getaddrinfo failed
+[2024-01-07 08:31:07,363] [INFO] [axolotl.utils.samplers.multipack._len_est:178] [PID:28] [RANK:1] packing_efficiency_estimate: 0.94 total_num_tokens per device: 214115←[39m
+[2024-01-07 08:31:07,367] [INFO] [axolotl.utils.samplers.multipack._len_est:178] [PID:28] [RANK:1] packing_efficiency_estimate: 0.94 total_num_tokens per device: 214115←[39m
+wandb: Currently logged in as: aamjad (tab-llm-finetuning). Use `wandb login --relogin` to force relogin
+wandb: Tracking run with wandb version 0.16.1
+wandb: Run data is saved locally in /__modal/volumes/vo-WkBaBEpEXjZ4Nh6cqGDtSg/axo-2024-01-07-08-28-20-6e57/wandb/run-20240107_083110-hsqzarzh
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run brisk-lion-1
+wandb: ⭐️ View project at https://wandb.ai/tab-llm-finetuning/code-7b-sql-output
+wandb: 🚀 View run at https://wandb.ai/tab-llm-finetuning/code-7b-sql-output/runs/hsqzarzh
+[2024-01-07 08:31:15,786] [INFO] [axolotl.callbacks.on_train_begin:567] [PID:27] [RANK:0] Axolotl config has been saved to WandB as an artifact.←[39m
+
+[2024-01-07 08:31:15,791] [INFO] [axolotl.utils.samplers.multipack._len_est:178] [PID:27] [RANK:0] packing_efficiency_estimate: 0.94 total_num_tokens per device: 214115←[39m
+[2024-01-07 08:31:15,794] [INFO] [axolotl.utils.samplers.multipack._len_est:178] [PID:27] [RANK:0] packing_efficiency_estimate: 0.94 total_num_tokens per device: 214115←[39m
+←[1A  0%|          | 0/10 [00:00<?, ?it/s]
+←[1A 10%|█         | 1/10 [00:21<03:11, 21.30s/it]
+←[1A
+{'loss': 0.875, 'learning_rate': 2e-05, 'epoch': 0.5}
+←[1A
+←[1A 10%|█         | 1/10 [00:21<03:11, 21.30s/it]
+
+←[1A  0%|          | 0/1 [00:00<?, ?it/s]
+←[1A
+←[1A
+
+←[1A
+{'eval_loss': 0.34464332461357117, 'eval_runtime': 1.5067, 'eval_samples_per_second': 21.239, 'eval_steps_per_second': 0.664, 'epoch': 0.5}
+←[1A
+←[1A 10%|█         | 1/10 [00:22<03:11, 21.30s/it]
+
+←[1A100%|██████████| 1/1 [00:00<00:00, 341.31it/s]
+
+[2024-01-07 08:31:57,332] [INFO] [axolotl.callbacks.on_step_end:122] [PID:27] [RANK:0] GPU memory usage while training: 7.677GB (+54.243GB cache, +2.373GB misc)←[39m
+[2024-01-07 08:31:57,332] [INFO] [axolotl.callbacks.on_step_end:122] [PID:28] [RANK:1] GPU memory usage while training: 7.719GB (+54.270GB cache, +2.373GB misc)←[39m
+
+←[1A 20%|██        | 2/10 [00:41<02:45, 20.68s/it]
+←[1A
+{'loss': 0.8844, 'learning_rate': 4e-05, 'epoch': 1.0}
+←[1A
+←[1A 20%|██        | 2/10 [00:41<02:45, 20.68s/it]
+
+←[1A  0%|          | 0/1 [00:00<?, ?it/s]
+←[1A
+←[1A
+
+←[1A
+{'eval_loss': 0.34207138419151306, 'eval_runtime': 1.462, 'eval_samples_per_second': 21.887, 'eval_steps_per_second': 0.684, 'epoch': 1.0}
+←[1A
+←[1A 20%|██        | 2/10 [00:43<02:45, 20.68s/it]
+
+←[1A100%|██████████| 1/1 [00:00<00:00, 34.56it/s]
+
+←[1A
+←[1A 30%|███       | 3/10 [01:01<02:22, 20.39s/it]
+←[1A
+{'loss': 0.8819, 'learning_rate': 6e-05, 'epoch': 1.5}
+←[1A
+←[1A 30%|███       | 3/10 [01:01<02:22, 20.39s/it]
+
+←[1A  0%|          | 0/1 [00:00<?, ?it/s]
+←[1A
+←[1A
+
+←[1A
+{'eval_loss': 0.33637338876724243, 'eval_runtime': 1.4577, 'eval_samples_per_second': 21.952, 'eval_steps_per_second': 0.686, 'epoch': 1.5}
+←[1A
+←[1A 30%|███       | 3/10 [01:03<02:22, 20.39s/it]
+
+←[1A100%|██████████| 1/1 [00:00<00:00, 35.78it/s]
+
+←[1A                                             /root/miniconda3/envs/py3.10/lib/python3.10/site-packages/torch/nn/modules/module.py:1802: UserWarning: Positional args are being deprecated, use kwargs instead. Refer to https://pytorch.org/docs/master/generated/torch.nn.Module.html#torch.nn.Module.state_dict for details.
+  warnings.warn(
+/root/miniconda3/envs/py3.10/lib/python3.10/site-packages/torch/nn/modules/module.py:1802: UserWarning: Positional args are being deprecated, use kwargs instead. Refer to https://pytorch.org/docs/master/generated/torch.nn.Module.html#torch.nn.Module.state_dict for details.
+  warnings.warn(
+[2024-01-07 08:32:52,009] [INFO] [axolotl.utils.samplers.multipack._len_est:178] [PID:27] [RANK:0] packing_efficiency_estimate: 0.94 total_num_tokens per device: 214115←[39m
+[2024-01-07 08:32:52,009] [INFO] [axolotl.utils.samplers.multipack._len_est:178] [PID:28] [RANK:1] packing_efficiency_estimate: 0.94 total_num_tokens per device: 214115←[39m
+[2024-01-07 08:32:52,013] [INFO] [axolotl.utils.samplers.multipack._len_est:178] [PID:27] [RANK:0] packing_efficiency_estimate: 0.94 total_num_tokens per device: 214115←[39m
+[2024-01-07 08:32:52,014] [INFO] [axolotl.utils.samplers.multipack._len_est:178] [PID:28] [RANK:1] packing_efficiency_estimate: 0.94 total_num_tokens per device: 214115←[39m
+
+←[1A 40%|████      | 4/10 [01:55<03:21, 33.59s/it]
+←[1A
+{'loss': 0.838, 'learning_rate': 8e-05, 'epoch': 1.5}
+←[1A
+←[1A 40%|████      | 4/10 [01:55<03:21, 33.59s/it]
+
+←[1A  0%|          | 0/1 [00:00<?, ?it/s]
+←[1A
+←[1A
+
+←[1A
+{'eval_loss': 0.31591224670410156, 'eval_runtime': 1.5335, 'eval_samples_per_second': 20.867, 'eval_steps_per_second': 0.652, 'epoch': 1.5}
+←[1A
+←[1A 40%|████      | 4/10 [01:56<03:21, 33.59s/it]
+
+←[1A100%|██████████| 1/1 [00:00<00:00, 37.24it/s]
+
+
+←[1A 50%|█████     | 5/10 [02:15<02:24, 28.81s/it]
+←[1A
+{'loss': 0.7564, 'learning_rate': 0.0001, 'epoch': 2.0}
+←[1A
+←[1A 50%|█████     | 5/10 [02:15<02:24, 28.81s/it]
+
+←[1A  0%|          | 0/1 [00:00<?, ?it/s]
+←[1A
+←[1A
+
+←[1A
+{'eval_loss': 0.27735161781311035, 'eval_runtime': 1.4588, 'eval_samples_per_second': 21.936, 'eval_steps_per_second': 0.686, 'epoch': 2.0}
+←[1A
+←[1A 50%|█████     | 5/10 [02:17<02:24, 28.81s/it]
+
+←[1A100%|██████████| 1/1 [00:00<00:00, 35.47it/s]
+
+←[1A
+←[1A 60%|██████    | 6/10 [02:35<01:43, 25.85s/it]
+←[1A
+{'loss': 0.6026, 'learning_rate': 0.00012, 'epoch': 2.5}
+←[1A
+←[1A 60%|██████    | 6/10 [02:35<01:43, 25.85s/it]
+
+←[1A  0%|          | 0/1 [00:00<?, ?it/s]
+←[1A
+←[1A
+
+←[1A
+{'eval_loss': 0.23696951568126678, 'eval_runtime': 1.467, 'eval_samples_per_second': 21.814, 'eval_steps_per_second': 0.682, 'epoch': 2.5}
+←[1A
+←[1A 60%|██████    | 6/10 [02:37<01:43, 25.85s/it]
+
+←[1A100%|██████████| 1/1 [00:00<00:00, 36.79it/s]
+
+[2024-01-07 08:34:23,174] [INFO] [axolotl.utils.samplers.multipack._len_est:178] [PID:28] [RANK:1] packing_efficiency_estimate: 0.94 total_num_tokens per device: 214115←[39m
+[2024-01-07 08:34:23,176] [INFO] [axolotl.utils.samplers.multipack._len_est:178] [PID:27] [RANK:0] packing_efficiency_estimate: 0.94 total_num_tokens per device: 214115←[39m
+[2024-01-07 08:34:23,178] [INFO] [axolotl.utils.samplers.multipack._len_est:178] [PID:28] [RANK:1] packing_efficiency_estimate: 0.94 total_num_tokens per device: 214115←[39m
+[2024-01-07 08:34:23,180] [INFO] [axolotl.utils.samplers.multipack._len_est:178] [PID:27] [RANK:0] packing_efficiency_estimate: 0.94 total_num_tokens per device: 214115←[39m
+
+←[1A 70%|███████   | 7/10 [03:26<01:41, 33.93s/it]
+←[1A
+{'loss': 0.424, 'learning_rate': 0.00014, 'epoch': 2.5}
+←[1A
+←[1A 70%|███████   | 7/10 [03:26<01:41, 33.93s/it]
+
+←[1A  0%|          | 0/1 [00:00<?, ?it/s]
+←[1A
+←[1A
+
+←[1A
+{'eval_loss': 0.21039731800556183, 'eval_runtime': 1.4367, 'eval_samples_per_second': 22.273, 'eval_steps_per_second': 0.696, 'epoch': 2.5}
+←[1A
+←[1A 70%|███████   | 7/10 [03:27<01:41, 33.93s/it]
+
+←[1A100%|██████████| 1/1 [00:00<00:00, 36.73it/s]
+
+←[1A
+←[1A 80%|████████  | 8/10 [03:46<00:59, 29.57s/it]
+←[1A
+{'loss': 0.2884, 'learning_rate': 0.00016, 'epoch': 3.0}
+←[1A
+←[1A 80%|████████  | 8/10 [03:46<00:59, 29.57s/it]
+
+←[1A  0%|          | 0/1 [00:00<?, ?it/s]
+←[1A
+←[1A
+
+←[1A
+{'eval_loss': 0.1964969038963318, 'eval_runtime': 1.4659, 'eval_samples_per_second': 21.83, 'eval_steps_per_second': 0.682, 'epoch': 3.0}
+←[1A
+←[1A 80%|████████  | 8/10 [03:48<00:59, 29.57s/it]
+
+←[1A100%|██████████| 1/1 [00:00<00:00, 35.90it/s]
+
+
+←[1A 90%|█████████ | 9/10 [04:06<00:26, 26.60s/it]
+←[1A
+{'loss': 0.2423, 'learning_rate': 0.00018, 'epoch': 3.5}
+←[1A
+←[1A 90%|█████████ | 9/10 [04:06<00:26, 26.60s/it]
+
+←[1A  0%|          | 0/1 [00:00<?, ?it/s]
+←[1A
+←[1A
+
+←[1A
+{'eval_loss': 0.18471349775791168, 'eval_runtime': 1.4591, 'eval_samples_per_second': 21.932, 'eval_steps_per_second': 0.685, 'epoch': 3.5}
+←[1A
+←[1A 90%|█████████ | 9/10 [04:08<00:26, 26.60s/it]
+
+←[1A100%|██████████| 1/1 [00:00<00:00, 36.14it/s]
+
+[2024-01-07 08:35:52,100] [INFO] [axolotl.utils.samplers.multipack._len_est:178] [PID:28] [RANK:1] packing_efficiency_estimate: 0.94 total_num_tokens per device: 214115←[39m
+[2024-01-07 08:35:52,104] [INFO] [axolotl.utils.samplers.multipack._len_est:178] [PID:27] [RANK:0] packing_efficiency_estimate: 0.94 total_num_tokens per device: 214115←[39m
+[2024-01-07 08:35:52,104] [INFO] [axolotl.utils.samplers.multipack._len_est:178] [PID:28] [RANK:1] packing_efficiency_estimate: 0.94 total_num_tokens per device: 214115←[39m
+[2024-01-07 08:35:52,107] [INFO] [axolotl.utils.samplers.multipack._len_est:178] [PID:27] [RANK:0] packing_efficiency_estimate: 0.94 total_num_tokens per device: 214115←[39m
+←[1A
+←[1A100%|██████████| 10/10 [04:55<00:00, 33.37s/it]
+←[1A
+{'loss': 0.2096, 'learning_rate': 0.0002, 'epoch': 3.5}
+←[1A
+←[1A100%|██████████| 10/10 [04:55<00:00, 33.37s/it]
+
+←[1A  0%|          | 0/1 [00:00<?, ?it/s]
+←[1A
+←[1A
+
+←[1A
+{'eval_loss': 0.1703033745288849, 'eval_runtime': 1.4367, 'eval_samples_per_second': 22.273, 'eval_steps_per_second': 0.696, 'epoch': 3.5}
+←[1A
+←[1A100%|██████████| 10/10 [04:56<00:00, 33.37s/it]
+
+←[1A100%|██████████| 1/1 [00:00<00:00, 37.30it/s]
+
+
+←[1A
+{'train_runtime': 334.831, 'train_samples_per_second': 59.254, 'train_steps_per_second': 0.03, 'train_loss': 0.6002614766359329, 'epoch': 3.5}
+←[1A
+←[1A100%|██████████| 10/10 [05:26<00:00, 33.37s/it]
+←[1A100%|██████████| 10/10 [05:26<00:00, 32.68s/it]
+[2024-01-07 08:36:42,544] [INFO] [axolotl.train.log:60] [PID:27] [RANK:0] Training Completed!!! Saving pre-trained model to ./lora-out←[39m
+wandb:
+wandb: Run history:
+wandb:                      eval/loss ███▇▅▄▃▂▂▁
+wandb:                   eval/runtime ▆▃▃█▃▃▁▃▃▁
+wandb:        eval/samples_per_second ▃▆▆▁▆▆█▆▆█
+wandb:          eval/steps_per_second ▃▆▆▁▆▆█▆▆█
+wandb:                    train/epoch ▁▁▂▂▃▃▃▃▅▅▆▆▆▆▇▇█████
+wandb:              train/global_step ▁▁▂▂▃▃▃▃▄▄▅▅▆▆▆▆▇▇███
+wandb:            train/learning_rate ▁▂▃▃▄▅▆▆▇█
+wandb:                     train/loss ████▇▅▃▂▁▁
+wandb:               train/total_flos ▁
+wandb:               train/train_loss ▁
+wandb:            train/train_runtime ▁
+wandb: train/train_samples_per_second ▁
+wandb:   train/train_steps_per_second ▁
+wandb:
+wandb: Run summary:
+wandb:                      eval/loss 0.1703
+wandb:                   eval/runtime 1.4367
+wandb:        eval/samples_per_second 22.273
+wandb:          eval/steps_per_second 0.696
+wandb:                    train/epoch 3.5
+wandb:              train/global_step 10
+wandb:            train/learning_rate 0.0002
+wandb:                     train/loss 0.2096
+wandb:               train/total_flos 2093796556800.0
+wandb:               train/train_loss 0.60026
+wandb:            train/train_runtime 334.831
+wandb: train/train_samples_per_second 59.254
+wandb:   train/train_steps_per_second 0.03
+wandb:
+wandb: 🚀 View run brisk-lion-1 at: https://wandb.ai/tab-llm-finetuning/code-7b-sql-output/runs/hsqzarzh
+wandb: Synced 6 W&B file(s), 0 media file(s), 1 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20240107_083110-hsqzarzh/logs
+Beginning merge fc-27Ckgu3vZYMp4KmORHMynY.
+
+==========
+== CUDA ==
+==========
+
+CUDA Version 11.8.0
+
+Container image Copyright (c) 2016-2023, NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+
+This container image and its contents are governed by the NVIDIA Deep Learning Container License.
+By pulling and using the container, you accept the terms and conditions of this license:
+https://developer.nvidia.com/ngc/nvidia-deep-learning-container-license
+
+A copy of this license is made available in this container at /NGC-DL-CONTAINER-LICENSE for your convenience.
+
+WARNING: The NVIDIA Driver was not detected.  GPU functionality will not be available.
+   Use the NVIDIA Container Toolkit to start this container with GPU support; see
+   https://docs.nvidia.com/datacenter/cloud-native/ .
+
+Merge from ./lora-out/checkpoint-10 in /runs/axo-2024-01-07-08-28-20-6e57
+The following values were not passed to `accelerate launch` and had defaults used instead:
+        `--num_processes` was set to a value of `0`
+        `--num_machines` was set to a value of `1`
+        `--mixed_precision` was set to a value of `'no'`
+        `--dynamo_backend` was set to a value of `'no'`
+To avoid this warning pass in values for each of the problematic parameters or run `accelerate config`.
+/root/miniconda3/envs/py3.10/lib/python3.10/site-packages/bitsandbytes/cextension.py:34: UserWarning: The installed version of bitsandbytes was compiled without GPU support. 8-bit optimizers, 8-bit multiplication, and GPU quantization are unavailable.
+  warn("The installed version of bitsandbytes was compiled without GPU support. "
+/root/miniconda3/envs/py3.10/lib/python3.10/site-packages/transformers/deepspeed.py:23: FutureWarning: transformers.deepspeed module is deprecated and will be removed in a future version. Please import deepspeed modules directly from transformers.integrations
+  warnings.warn(
+/root/miniconda3/envs/py3.10/lib/python3.10/site-packages/bitsandbytes/libbitsandbytes_cpu.so: undefined symbol: cadam32bit_grad_fp32
+                                 dP            dP   dP
+                                 88            88   88
+      .d8888b. dP.  .dP .d8888b. 88 .d8888b. d8888P 88
+      88'  `88  `8bd8'  88'  `88 88 88'  `88   88   88
+      88.  .88  .d88b.  88.  .88 88 88.  .88   88   88
+      `88888P8 dP'  `dP `88888P' dP `88888P'   dP   dP
+
+
+
+←[33m[2024-01-07 08:37:49,903] [WARNING] [axolotl.validate_config:219] [PID:25] [RANK:0] We recommend setting `load_in_8bit: true` for LORA finetuning←[39m
+[2024-01-07 08:37:49,983] [INFO] [axolotl.normalize_config:141] [PID:25] [RANK:0] GPU memory usage baseline: 0.000GB ()←[39m
+[2024-01-07 08:37:49,983] [INFO] [axolotl.common.cli.load_model_and_tokenizer:49] [PID:25] [RANK:0] loading tokenizer... codellama/CodeLlama-7b-Instruct-hf←[39m
+[2024-01-07 08:37:50,414] [DEBUG] [axolotl.load_tokenizer:172] [PID:25] [RANK:0] EOS: 2 / </s>←[39m
+[2024-01-07 08:37:50,414] [DEBUG] [axolotl.load_tokenizer:173] [PID:25] [RANK:0] BOS: 1 / <s>←[39m
+[2024-01-07 08:37:50,414] [DEBUG] [axolotl.load_tokenizer:174] [PID:25] [RANK:0] PAD: 2 / </s>←[39m
+[2024-01-07 08:37:50,414] [DEBUG] [axolotl.load_tokenizer:175] [PID:25] [RANK:0] UNK: 0 / <unk>←[39m
+[2024-01-07 08:37:50,414] [INFO] [axolotl.common.cli.load_model_and_tokenizer:51] [PID:25] [RANK:0] loading model and (optionally) peft_config...←[39m
+[2024-01-07 08:37:50,438] [INFO] [axolotl.load_model:273] [PID:25] [RANK:0] patching _expand_mask←[39m
+
+←[1ALoading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]
+←[1ALoading checkpoint shards:  50%|█████     | 1/2 [00:12<00:12, 12.35s/it]
+←[1ALoading checkpoint shards: 100%|██████████| 2/2 [00:15<00:00,  6.81s/it]
+←[1ALoading checkpoint shards: 100%|██████████| 2/2 [00:15<00:00,  7.64s/it]
+[2024-01-07 08:38:56,499] [INFO] [axolotl.load_model:528] [PID:25] [RANK:0] converting modules to torch.bfloat16 for flash attention←[39m
+[2024-01-07 08:38:56,658] [INFO] [axolotl.load_lora:631] [PID:25] [RANK:0] found linear modules: ['q_proj', 'o_proj', 'gate_proj', 'up_proj', 'down_proj', 'k_proj', 'v_proj']←[39m
+[2024-01-07 08:38:56,658] [DEBUG] [axolotl.load_lora:646] [PID:25] [RANK:0] Loading pretained PEFT - LoRA←[39m
+[2024-01-07 08:38:57,116] [WARNING] [auto_gptq.nn_modules.qlinear.qlinear_cuda.<module>:16] [PID:25] CUDA extension not installed.
+[2024-01-07 08:38:57,118] [WARNING] [auto_gptq.nn_modules.qlinear.qlinear_cuda_old.<module>:15] [PID:25] CUDA extension not installed.
+trainable params: 39,976,960 || all params: 6,778,523,648 || trainable%: 0.5897590991188056
+[2024-01-07 08:38:58,841] [INFO] [axolotl.load_model:558] [PID:25] [RANK:0] GPU memory usage after adapters: 0.000GB ()←[39m
+[2024-01-07 08:38:58,842] [INFO] [axolotl.scripts.do_merge_lora:73] [PID:25] [RANK:0] running merge of LoRA with base model←[39m
+[2024-01-07 08:39:56,556] [INFO] [axolotl.scripts.do_merge_lora:78] [PID:25] [RANK:0] saving merged model to: lora-out/merged←[39m
+✓ App completed. View run at https://modal.com/ayeshaamjad0828/apps/ap-OLRcilArSgMsZvLLtGbOga
+
+D:\OneDrive - Astera Software\Documents\GitHub\LLMs-Table-Processing>modal deploy src
+✓ Created objects.
+├── 🔨 Created mount D:\OneDrive - Astera Software\Documents\GitHub\LLMs-Table-Processing\src
+├── 🔨 Created train.
+├── 🔨 Created merge.
+├── 🔨 Created launch.
+└── 🔨 Created Inference.completion.
+✓ App deployed! 🎉
+
+View Deployment: https://modal.com/apps/ayeshaamjad0828/finetune-axolotl
+

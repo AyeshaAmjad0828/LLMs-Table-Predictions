@@ -7,7 +7,7 @@ import os
 
 from .common import APP_NAME, VOLUME_CONFIG
 
-stub = modal.Stub("example-axolotl-gui")
+stub = modal.Stub("tablellm-axolotl-gui")
 stub.q = modal.Queue.new()  # Pass back the URL to auto-launch
 
 gradio_image = modal.Image.debian_slim().pip_install("gradio==4.5.0")
@@ -24,7 +24,7 @@ def gui(config_raw: str, data_raw: str):
         Inference = modal.Cls.lookup(APP_NAME, "Inference")
     except modal.exception.NotFoundError:
         raise Exception(
-            "Must first deploy training backend with `modal deploy train.py`."
+            "Must first deploy training backend with `modal deploy finetune.py`."
         )
 
     def jobs_table():
@@ -78,7 +78,7 @@ def gui(config_raw: str, data_raw: str):
         try:
             run_folder = f"/runs/{model.split('@')[0]}"
             with (
-                open(f"{run_folder}/exampleconfig.yml", "r") as config,
+                open(f"{run_folder}/finalconfig.yml", "r") as config,
                 open(f"{run_folder}/my_data.jsonl", "r") as data,
             ):
                 return config.read(), data.read()
@@ -106,7 +106,7 @@ def gui(config_raw: str, data_raw: str):
             with gr.Row():
                 with gr.Tab("Config (YAML)"):
                     config_input = gr.Code(
-                        label="exampleconfig.yml", lines=20, value=config_raw
+                        label="finalconfig.yml", lines=20, value=config_raw
                     )
                 with gr.Tab("Data (JSONL)"):
                     data_input = gr.Code(
@@ -136,7 +136,7 @@ def gui(config_raw: str, data_raw: str):
                         )
                         refresh_button = gr.Button("Refresh", size="sm")
                     with gr.Tab("Config (YAML)"):
-                        model_config = gr.Code(label="exampleconfig.yml", lines=20)
+                        model_config = gr.Code(label="finalconfig.yml", lines=20)
                     with gr.Tab("Data (JSONL)"):
                         model_data = gr.Code(label="my_data.jsonl", lines=20)
 
@@ -144,7 +144,7 @@ def gui(config_raw: str, data_raw: str):
                     input_text = gr.Textbox(
                         label="Input Text (please include prompt manually)",
                         lines=10,
-                        value="[INST] How do I deploy a Modal function? [/INST]",
+                        value="[INST] What is the fraud value? [/INST]",
                     )
                     inference_button = gr.Button(
                         "Run Inference", variant="primary", size="sm"
@@ -176,7 +176,7 @@ def gui(config_raw: str, data_raw: str):
 @stub.local_entrypoint()
 def main():
     dir = os.path.dirname(__file__)
-    with open(f"{dir}/exampleconfig.yml", "r") as cfg, open(
+    with open(f"{dir}/finalconfig.yml", "r") as cfg, open(
         f"{dir}/my_data.jsonl", "r"
     ) as data:
         handle = gui.spawn(cfg.read(), data.read())
