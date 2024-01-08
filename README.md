@@ -2,6 +2,8 @@
 ## Finetuning LLMs to predict on some of the popular Kaggle datasets. 
 
 > Refer to the [pre-requisites]([AyeshaAmjad0828/LLMs-Table-Predictions: Training LLMs on some of the popular kaggle datasets (github.com)](https://github.com/AyeshaAmjad0828/LLMs-Table-Predictions?tab=readme-ov-file#pre-requisites)) section for the environment set up prior to starting this experiment.
+>
+> Here are the results of this experiment on [fraud detection](https://www.kaggle.com/datasets/kartik2112/fraud-detection) data. 
 
 ### Technology Stack
 
@@ -134,12 +136,14 @@ The default configuration fine-tunes meta-llama/Llama-2-7b-chat-hf with 20 epoch
 
 The command will first install all the required packages. Followed by creating objects for the function defined in `finetune.py`. 
 
-A link to app logs maintained by modal is provided which stores information on cpu and gpu consumption. 
+A link to app logs maintained by modal is provided which stores information on CPU and GPU consumption. 
 
 ![image-20240108170622349](./README.assets/image-20240108170622349.png)
 
 A link to weights and biases dashboard is also provided along with the info passed to it.
-![image-20240108171008006](./README.assets/image-20240108171008006.png)
+![image-20240108230033225](./README.assets/image-20240108230033225.png)
+
+
 
 
 
@@ -237,3 +241,10 @@ VOLUME_CONFIG: dict[str | os.PathLike, Volume] = {
 
 
 
+### Results on Llama2-7B for Fraud Detection
+
+Here is a link to the weights and biases report on the results of finetuning Llama2-7B on the fraud detection data:
+
+https://api.wandb.ai/links/tab-llm-finetuning/r8wimmyv
+
+Fine the detailed log of finetuning in runs folder
