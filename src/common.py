@@ -1,7 +1,7 @@
 from modal import Stub, Image, Volume, Secret
 import os
 
-APP_NAME = "finetune-axolotl"
+APP_NAME = "tablefinetune-axolotl"
 
 # Latest image hash of winglian/axolotl:main-py3.10-cu118-2.0.1 (2023-12-11)
 AXOLOTL_REGISTRY_SHA = (
