@@ -120,7 +120,7 @@ Training job uses finalconfig.yml where training configurations are defined. Her
 
 
 
-##### Using CLI for finetuning
+#### Using CLI for finetuning
 
 Navigate to the location containing src folder in CLI and start the finetuning with a simple command.
 
@@ -136,14 +136,33 @@ The default configuration fine-tunes meta-llama/Llama-2-7b-chat-hf with 20 epoch
 
 The command will first install all the required packages. Followed by creating objects for the function defined in `finetune.py`. 
 
-A link to app logs maintained by modal is provided which stores information on CPU and GPU consumption. 
+A link to app logs maintained by modal is provided which stores information on CPU and GPU consumption. Here is an example screenshot.
 
 ![image-20240108170622349](./README.assets/image-20240108170622349.png)
 
 A link to weights and biases dashboard is also provided along with the info passed to it.
+
 ![image-20240108230033225](./README.assets/image-20240108230033225.png)
 
 
+
+#### Using CLI for Inference
+
+Once the model finetuning completes, check the modal volume for the latest filename. This is LLM weights file. In CLI, perform inference using a simple command.
+
+```
+modal run -q src.inference::inference_main --run-folder /runs/axo-2024-01-08-15-39-45-c7ef
+```
+
+/runs/axo-2024-01-08-15-39-45-c7ef is the path in my volumes that I can fetch with following command in CLI, where `tablellm-runs-vol` is defined in the [common.py](https://github.com/AyeshaAmjad0828/LLMs-Table-Predictions/blob/main/src/common.py). 
+
+```
+modal volume ls tablellm-runs-vol
+```
+
+Here is an screenshot from the experiment:
+
+![image-20240108232414261](./README.assets/image-20240108232414261.png)
 
 
 
@@ -182,30 +201,34 @@ This experiment involves 3 steps
 
 ### Pre-requisites
 
-#### Setting up accounts on Modal, Hugging Face, W&B
+#### Setting up accounts on OpenAI, Modal, Hugging Face, W&B, 
 
-1. Create an account on [Modal](https://modal.com/).
+1. Create and account on OpenAI and get generate an [API](https://platform.openai.com/api-keys). 
 
-2. Create an account on [Hugging face](https://huggingface.co/) and agree to the terms and conditions for accessing [Llama](https://huggingface.co/meta-llama/Llama-2-13b-chat-hf) models. 
+2. Save this API as an environment variable under the name OPENAI_API_KEY. 
 
-3. Get the [hugging face access token](https://huggingface.co/settings/tokens). 
+3. Create an account on [Modal](https://modal.com/).
 
-4. Create a new [secret](https://modal.com/ayeshaamjad0828/secrets) for hugging face in your modal account. This secret is a way to mask [hugging face access token](https://modal.com/ayeshaamjad0828/secrets). 
+4. Create an account on [Hugging face](https://huggingface.co/) and agree to the terms and conditions for accessing [Llama](https://huggingface.co/meta-llama/Llama-2-13b-chat-hf) models. 
+
+5. Get the [hugging face access token](https://huggingface.co/settings/tokens). 
+
+6. Create a new [secret](https://modal.com/ayeshaamjad0828/secrets) for hugging face in your modal account. This secret is a way to mask [hugging face access token](https://modal.com/ayeshaamjad0828/secrets). 
 
    ![image-20240107203301672](./README.assets/image-20240107203301672.png)
 
    Once created, your keys will be displayed in the same location. 
    ![image-20240107203439593](./README.assets/image-20240107203439593.png)
 
-5. Install modal in your current python environment `pip install modal`.
+7. Install modal in your current python environment `pip install modal`.
 
-6. Open cmd, navigate to python scripts folder  ...\AppData\Local\Programs\Python\Python310\Scripts
+8. Open cmd, navigate to python scripts folder  ...\AppData\Local\Programs\Python\Python310\Scripts
 
-7.  Set up modal token in your python environment `modal setup`.
+9. Set up modal token in your python environment `modal setup`.
 
    ![modal-setup](./README.assets/modal-setup.PNG)
 
-8. (Optional) To monitor LLM finetuning performance visually, set up a [weights and biases account](https://wandb.ai/home) , get its [authorize key](https://wandb.ai/authorize), and create its [secret](https://modal.com/ayeshaamjad0828/secrets) in the same way as hugging face secret on modal. 
+10. (Optional) To monitor LLM finetuning performance visually, set up a [weights and biases account](https://wandb.ai/home) , get its [authorize key](https://wandb.ai/authorize), and create its [secret](https://modal.com/ayeshaamjad0828/secrets) in the same way as hugging face secret on modal. 
 
    Install weights and biases library in your current python environment  `pip install wandb`
 
@@ -272,4 +295,4 @@ Here is a link to the weights and biases report on the results of finetuning Lla
 
 https://api.wandb.ai/links/tab-llm-finetuning/r8wimmyv
 
-Fine the detailed log of finetuning in runs folder
+Find the detailed log of finetuning in [runs](https://github.com/AyeshaAmjad0828/LLMs-Table-Predictions/tree/main/runs) folder. 
