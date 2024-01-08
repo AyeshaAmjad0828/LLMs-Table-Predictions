@@ -1,6 +1,6 @@
-base_model: codellama/CodeLlama-7b-Instruct-hf
+base_model: meta-llama/Llama-2-7b-chat-hf    #meta-llama/Llama-2-13b-chat-hf, #meta-llama/Llama-2-70b-chat-hf
 model_type: LlamaForCausalLM
-tokenizer_type: CodeLlamaTokenizer
+tokenizer_type: LlamaTokenizer
 is_llama_derived_model: true
 
 load_in_8bit: false
@@ -38,7 +38,7 @@ lora_dropout: 0.05
 lora_target_linear: true # target all linear layers
 lora_fan_in_fan_out:
 
-wandb_project: code-7b-sql-output
+wandb_project: tabllm-7b-prediction-output
 wandb_watch: all
 wandb_entity:
 wandb_run_id:
