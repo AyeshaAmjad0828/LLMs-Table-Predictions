@@ -120,7 +120,7 @@ Training job uses finalconfig.yml where training configurations are defined. Her
 
 
 
-##### Using CLI for finetuning
+#### Using CLI for finetuning
 
 Navigate to the location containing src folder in CLI and start the finetuning with a simple command.
 
@@ -141,9 +141,28 @@ A link to app logs maintained by modal is provided which stores information on C
 ![image-20240108170622349](./README.assets/image-20240108170622349.png)
 
 A link to weights and biases dashboard is also provided along with the info passed to it.
+
 ![image-20240108230033225](./README.assets/image-20240108230033225.png)
 
 
+
+#### Using CLI for Inference
+
+Once the model finetuning completes, check the modal volume for the latest filename. This is LLM weights file. In CLI, perform inference using a simple command.
+
+```
+modal run -q src.inference::inference_main --run-folder /runs/axo-2024-01-08-15-39-45-c7ef
+```
+
+/runs/axo-2024-01-08-15-39-45-c7ef is the path in my volumes that I can fetch with following command in CLI, where `tablellm-runs-vol` is defined in the [common.py](https://github.com/AyeshaAmjad0828/LLMs-Table-Predictions/blob/main/src/common.py). 
+
+```
+modal volume ls tablellm-runs-vol
+```
+
+Here is an screenshot from the experiment:
+
+![image-20240108232414261](./README.assets/image-20240108232414261.png)
 
 
 
@@ -247,4 +266,4 @@ Here is a link to the weights and biases report on the results of finetuning Lla
 
 https://api.wandb.ai/links/tab-llm-finetuning/r8wimmyv
 
-Fine the detailed log of finetuning in runs folder
+Find the detailed log of finetuning in [runs](https://github.com/AyeshaAmjad0828/LLMs-Table-Predictions/tree/main/runs) folder. 
