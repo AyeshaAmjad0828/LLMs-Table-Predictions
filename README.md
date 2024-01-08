@@ -149,6 +149,31 @@ Here is an a diagram showing a high-level set up of the second experiment.
 
 ![Experiment2](./README.assets/Experiment2.jpg)
 
+This experiment involves 3 steps
+1. Data Serialization
+   - **Method:** Manual Template
+   - **Description:** Data is serialized using the Manual Template method. Sample file is [manual_template_serialization.jsonl](https://github.com/AzeemQidwai/LLMs-Table-Predictions/blob/azeem-main/serialization/serialized_dataset/manual_template_serialization.jsonl)
+
+2. Embedding Vectors Generation
+   - **Model:** OpenAI embedding model `text-embedding-ada-002`
+   - **Description:** Embedding vectors are generated using the specified OpenAI model.
+
+3. AutoML Evaluation
+   - **Models:** AutoML class of `flaml`
+   - **Description:** Embedded data is passed to the AutoML class for assessing the best-performing estimator and hyperparameter configuration.
+
+#### Table to Text Serialization
+   - **Method:** Manual Template
+   - **Description:** Sentence-like strings of tabular data are created using the Manual Template method.
+
+#### Embedding Vectors for ML Models
+   - **Model:** OpenAI embedding model `text-embedding-ada-002`
+   - **Description:** Sentences are embedded using the OpenAI model for ML model prediction.
+
+#### AutoML Assessment
+   - **Class:** AutoML class of `flaml`
+   - **Description:** The embedded data is evaluated to determine the best estimator and hyperparameter configuration.
+
 
 
 ### Pre-requisites
