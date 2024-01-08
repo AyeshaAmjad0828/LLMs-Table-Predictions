@@ -7,9 +7,9 @@
 
 ### Technology Stack
 
-| Hugging Face                          | Axolotl                                                      | Modal                                                        | Llama                                                        | OpenAI                                                       | Weights&Biases                                          |
-| ------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------- |
-| ![images](./README.assets/images.png) | ![image-20240107212039440](./README.assets/image-20240107212039440.png) | ![image-20240107211831323](./README.assets/image-20240107211831323.png) | ![image-20240107212749542](./README.assets/image-20240107212749542.png) | ![image-20240107212933043](./README.assets/image-20240107212933043.png) | ![wb-logo-lightbg](./README.assets/wb-logo-lightbg.png) |
+| Hugging Face                          | Axolotl                                                      | Modal                                                        | Llama                                                        | Weights&Biases                                          | OpenAI                                                       | FLAML                                                        |
+| ------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| ![images](./README.assets/images.png) | ![image-20240107212039440](./README.assets/image-20240107212039440.png) | ![image-20240107211831323](./README.assets/image-20240107211831323.png) | ![image-20240107212749542](./README.assets/image-20240107212749542.png) | ![wb-logo-lightbg](./README.assets/wb-logo-lightbg.png) | ![image-20240107212933043](./README.assets/image-20240107212933043.png) | ![image-20240108235710259](./README.assets/image-20240108235710259.png) |
 
 ### Overview
 
@@ -24,7 +24,7 @@ Let's go over the design and execution of each experiment in a step by step mann
 
 ### Experiment 1 - Finetuning an LLM
 
-Here is an a diagram showing a high-level set up of the first experiment.
+Here is an a diagram showing a high-level set up of the first experiment. All the related code is in [src](https://github.com/AyeshaAmjad0828/LLMs-Table-Predictions/tree/main/src) folder.
 
 ![Experiment1](./README.assets/Experiment1.jpg)
 
@@ -168,7 +168,7 @@ Here is an screenshot from the experiment:
 
 ### Experiment 2 - LLM Vector Embeddings for AutoML
 
-Here is an a diagram showing a high-level set up of the second experiment.
+Here is an a diagram showing a high-level set up of the second experiment. All the related code is in [serialization](https://github.com/AyeshaAmjad0828/LLMs-Table-Predictions/tree/main/serialization) folder. 
 
 ![Experiment2](./README.assets/Experiment2.jpg)
 
