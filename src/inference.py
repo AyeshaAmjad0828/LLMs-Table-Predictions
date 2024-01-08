@@ -59,7 +59,7 @@ class Inference:
 @stub.local_entrypoint()
 def inference_main(run_folder: str):
     text = input(
-        "Using the data values below, generate a reponse to the instructions:\n"
+        "Using the data values below, what is the is_fraud value?:\n"
     )
     print("Loading model ...")
     for chunk in Inference(f"{run_folder}/lora-out/merged").completion.remote_gen(text):
