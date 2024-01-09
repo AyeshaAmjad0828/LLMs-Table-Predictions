@@ -13,7 +13,7 @@
 
 ### Overview
 
-The objective of this project is to assess the quality of LLM training and predictions results on tabular datasets. The inspiration is drawn from [clinicalml/TabLLM (github.com)](https://github.com/clinicalml/TabLLM) which performed few-shot classification of tabular data with LLMs. 
+The objective of this project is to assess the quality of LLM training and prediction results on tabular datasets. The inspiration is drawn from [clinicalml/TabLLM (github.com)](https://github.com/clinicalml/TabLLM) which performed few-shot classification of tabular data with LLMs. 
 
 The project consists of two experiments:
 
@@ -31,14 +31,14 @@ Here is an a diagram showing a high-level set up of the first experiment. All th
 This experiment contains three steps:
 
 1. Serializing the data (both train and test) from table to text. (list serialization, text template, manual template)
-2. Finetuning an LLMs (Llama-7B, Llama-13b, Llama 70b). All logic related to finetuning is in src/finetune.py
+2. Finetuning an LLM (Llama-7B, Llama-13b, Llama 70b). All logic related to finetuning is in src/finetune.py
 3. Perform inference/prediction on test data using finetuned model. All logic related to inference is in src/inference.py
 
 #### Table to Text
 
-Three ways are used for converting tabular data into a text strings. The most promising results were given by manual conversion and [bloom-560m-finetuned-totto-table-to-text](https://huggingface.co/Narrativaai/bloom-560m-finetuned-totto-table-to-text). 
+Three ways are used for converting tabular data into a text strings. The most promising results were given by manual conversion and [bloom-560m-finetuned-totto-table-to-text](https://huggingface.co/Narrativaai/bloom-560m-finetuned-totto-table-to-text) algorithm. 
 
-The text sentences are then manually labeled (using expressions) as input for features and output for target variable value compatible with a jsonl file structure. The subset of final dataset is added to [my_data.jsonl](https://github.com/AyeshaAmjad0828/LLMs-Table-Predictions/blob/main/src/my_data.jsonl). 
+The text sentences are then manually labeled (using expressions) as input for features and output for target variable value compatible with a .jsonl file structure. The subset of final dataset is added to [my_data.jsonl](https://github.com/AyeshaAmjad0828/LLMs-Table-Predictions/blob/main/src/my_data.jsonl). 
 
 > The actual fraud.jsonl used for the training contains 1,296,675 records. 
 
@@ -203,9 +203,9 @@ This experiment involves 3 steps
 
 #### Setting up accounts on OpenAI, Modal, Hugging Face, W&B, 
 
-1. Create and account on OpenAI and get generate an [API](https://platform.openai.com/api-keys). 
+1. Create an account on OpenAI and generate its [API](https://platform.openai.com/api-keys) key. 
 
-2. Save this API as an environment variable under the name OPENAI_API_KEY. 
+2. Save this API as a system environment variable under the name OPENAI_API_KEY. 
 
 3. Create an account on [Modal](https://modal.com/).
 
